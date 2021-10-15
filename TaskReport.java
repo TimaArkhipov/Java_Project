@@ -28,7 +28,7 @@ public class TaskReport {//TaskReport
 	}
 	public void setMode(boolean flag) {
 		if (flag == false) {
-		//false - таймер, true - секундомер
+		//false - ГІГ Г©Г¬ГҐГ°, true - Г±ГҐГЄГіГ­Г¤Г®Г¬ГҐГ°
 			
 		}
 		else {
@@ -36,3 +36,4 @@ public class TaskReport {//TaskReport
 		}
 	}
 }
+
