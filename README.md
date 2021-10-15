@@ -18,6 +18,7 @@
 [v1](https://lucid.app/lucidchart/invitations/accept/inv_dc1c26eb-2bae-4893-85e0-eb7d4645430e?viewport_loc=-11%2C-10%2C1365%2C599%2C0_0)
 
 [v2.0](https://lucid.app/lucidchart/invitations/accept/inv_93a000ba-d83c-444d-9364-314253533507?viewport_loc=-388%2C-953%2C4039%2C2017%2C0_0)
+
 ![image](https://user-images.githubusercontent.com/80381507/137463201-50ddf247-db4f-4bf2-924e-cfc012b1daba.png)
 
 ### Диаграмма последовательностей
