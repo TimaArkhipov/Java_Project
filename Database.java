@@ -1,5 +1,3 @@
-package core;
-
 import java.util.List;
 
 public class Database {
