@@ -1,8 +1,6 @@
 import java.io.FileWriter;
 import java.io.FileReader;
-
 import java.io.Externalizable;
-
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -16,7 +14,6 @@ public class Deal implements Externalizable {
 	private int id;
 	private String description;
 	
-	//tr = task report
 	private HashSet<TaskReport> taskReport = new HashSet<TaskReport>();
 	
 	public Deal(){
@@ -35,13 +32,17 @@ public class Deal implements Externalizable {
 	public void setName(String new_name) {
 		name = new_name;
 	}
+	
 	public void setDescription(String new_desc) {
 		description = new_desc;
 	}
+	
 	//private void makeId() {}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -61,20 +62,18 @@ public class Deal implements Externalizable {
 	public void setTr(HashSet<TaskReport> tr) {
 		this.taskReport = tr;
 	}
+	
 	@Override
 	public String toString() {
-		String s =new String() ;
+		String s = new String();
 		for(TaskReport i : taskReport)
-		{
-			s+=i.toString();
-		}
-		
+			s += i.toString();
 		return "Name of deal: " + name + "\n" +
-				"Description of deal: " + description + "\n"+s;
+				"Description of deal: " + description + "\n" + s;
 				//"ID of deal: " + Integer.toString(id) + "\n";
 	}
-//вывод в файл
-	public void outputToFile(String fileName) {
+//ГўГ»ГўГ®Г¤ Гў ГґГ Г©Г«
+/*	public void outputToFile(String fileName) {
 		try (FileWriter writer = new FileWriter(fileName, false)) { 
 			writer.write(this.toString());
 			writer.flush();
@@ -82,8 +81,8 @@ public class Deal implements Externalizable {
 			ex.printStackTrace();
 		}
 	}
-//чтение с файла
-	public void inputToFile(String fileName) {//не дописано!!!
+//Г·ГІГҐГ­ГЁГҐ Г± ГґГ Г©Г«Г 
+	public void inputToFile(String fileName) {//Г­ГҐ Г¤Г®ГЇГЁГ±Г Г­Г®!!!
 		try (FileReader reader = new FileReader(fileName)) { 
 			
 			
@@ -91,23 +90,20 @@ public class Deal implements Externalizable {
 			ex.printStackTrace();
 		}
 	}
-
-//сериализация
+*/
+//Г±ГҐГ°ГЁГ Г«ГЁГ§Г Г¶ГЁГї
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(this.getName());
 		out.writeObject(this.getDescription());
 		out.writeObject(this.taskReport.size());
 		for(TaskReport i : taskReport)
-		{
 			i.writeExternal(out);
-		}
 	}
 
-	//десериализация
+	//Г¤ГҐГ±ГҐГ°ГЁГ Г«ГЁГ§Г Г¶ГЁГї
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		// TODO Auto-generated method stub
 		int count;
 		name=(String)in.readObject();
 		description=(String)in.readObject();
@@ -118,9 +114,6 @@ public class Deal implements Externalizable {
 			e.readExternal(in);
 			taskReport.add(e);
 		}
-		
-		
-		
 	}
 	
 }
