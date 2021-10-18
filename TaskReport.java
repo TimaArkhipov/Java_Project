@@ -5,30 +5,26 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 
-public class TaskReport implements Externalizable{//TaskReport
+public class TaskReport implements Externalizable {//TaskReport
 	private static final long serialVersionUID = 1L;
-	private int grade;//оценка
-	private String comment;//комментарий
-	private Date dateStart;//время начала
-	private Date dateStop;//время завершения
-	//private Deal deal;//к какому делу относится задание
+	private int grade;//Г®Г¶ГҐГ­ГЄГ 
+	private String comment;//ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГ©
+	private Date dateStart;//ГўГ°ГҐГ¬Гї Г­Г Г·Г Г«Г 
+	private Date dateStop;//ГўГ°ГҐГ¬Гї Г§Г ГўГҐГ°ГёГҐГ­ГЁГї
+	//private Deal deal;//ГЄ ГЄГ ГЄГ®Г¬Гі Г¤ГҐГ«Гі Г®ГІГ­Г®Г±ГЁГІГ±Гї Г§Г Г¤Г Г­ГЁГҐ
 	
 	
 	
-	public TaskReport(){ 
-		
-		
-		
-	}
+	public TaskReport(){ }
 	
-	TaskReport(/*Deal deal,*/ Date dateStart,Date dateStop){ 
+	TaskReport(/*Deal deal,*/ Date dateStart,Date dateStop) { 
 		this.dateStart=dateStart;
 		this.dateStop=dateStop;
 		//this.deal=deal;
 	}
 	
 	
-	public void setGrade(int new_grade){
+	public void setGrade(int new_grade) {
 		grade = new_grade;
 	}
 	
@@ -36,23 +32,19 @@ public class TaskReport implements Externalizable{//TaskReport
 		return grade;
 	}
 	
-	public Date getDateStart()
-	{
+	public Date getDateStart() {
 		return dateStart;
 	}
 	
-	public void setDateStart(Date dateStart)
-	{
+	public void setDateStart(Date dateStart) {
 		this.dateStart=dateStart;
 	}
 	
-	public Date getDateStop()
-	{
+	public Date getDateStop() {
 		return dateStop;
 	}
 	
-	public void setDateStop(Date dateStop)
-	{
+	public void setDateStop(Date dateStop) {
 		this.dateStop=dateStop;
 	}
 	
@@ -66,7 +58,7 @@ public class TaskReport implements Externalizable{//TaskReport
 	
 	
 	public void setMode(boolean flag) {
-		//false - таймер, true - секундомер
+		//false - ГІГ Г©Г¬ГҐГ°, true - Г±ГҐГЄГіГ­Г¤Г®Г¬ГҐГ°
 		if (flag == false) {
 		
 			
@@ -88,22 +80,17 @@ public class TaskReport implements Externalizable{//TaskReport
 
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
-		
 		out.writeObject(this.getGrade());
 		out.writeObject(this.getDateStart());
 		out.writeObject(this.getDateStop());
 		out.writeObject(this.getComment());
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		// TODO Auto-generated method stub
 		grade=(int)in.readObject();
 		dateStart=(Date)in.readObject();
 		dateStop=(Date)in.readObject();
 		comment=(String)in.readObject();
-		
 	}
 }
