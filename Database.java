@@ -25,11 +25,11 @@ public class Database implements Externalizable {
 	public static void PreLoad()
 	{		 
 	        FileInputStream fileInputStream;
-	        //инициализируем специальный объект Properties
-	        //типа Hashtable для удобной работы с данными
+	        //ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ Г±ГЇГҐГ¶ГЁГ Г«ГјГ­Г»Г© Г®ГЎГєГҐГЄГІ Properties
+	        //ГІГЁГЇГ  Hashtable Г¤Г«Гї ГіГ¤Г®ГЎГ­Г®Г© Г°Г ГЎГ®ГІГ» Г± Г¤Г Г­Г­Г»Г¬ГЁ
 	        Properties prop = new Properties();
 	        try {
-	            //обращаемся к файлу и получаем данные
+	            //Г®ГЎГ°Г Г№Г ГҐГ¬Г±Гї ГЄ ГґГ Г©Г«Гі ГЁ ГЇГ®Г«ГіГ·Г ГҐГ¬ Г¤Г Г­Г­Г»ГҐ
 	            fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
 	            prop.load(fileInputStream);
 	 
@@ -59,13 +59,12 @@ public class Database implements Externalizable {
 	
 	public void load() throws Exception 
 	{
-		FileInputStream fileInputStream=null;
-		ObjectInputStream objectInputStream=null;
+		FileInputStream fileInputStream = null;
+		ObjectInputStream objectInputStream = null;
 		try {
 		fileInputStream = new FileInputStream(fileName);
 		objectInputStream = new ObjectInputStream(fileInputStream);
-	    this.deals=(List<Deal>) objectInputStream.readObject();
-	    
+	    	this.deals=(List<Deal>) objectInputStream.readObject();
 	    
 		}
 		catch(Exception e)
@@ -79,71 +78,63 @@ public class Database implements Externalizable {
 		
 	}
 	@Override
-	public void writeExternal(ObjectOutput out) throws IOException {
+	public void writeExternal(ObjectOutput newOutput) throws IOException {
 		out.writeObject(this.deals.size());
 		for(Deal i : deals)
 		{
-			i.writeExternal(out);
+			i.writeExternal(newOutput);
 		}
 		
 	}
 	@Override
-	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+	public void readExternal(ObjectInput newInput) throws IOException, ClassNotFoundException {
 		int count=(int)in.readObject();
-		System.out.println("Good6");
-		for(int i=0; i<count;i++)
+		for(int i=0; i < count; i++)
 		{
 			Deal m = new Deal();
-			m.readExternal(in);
+			m.readExternal(newInput);
 			deals.add(m);
-			System.out.println("Goodit");
 		}
 		
 	}
 	@Override
 	public String toString() {
-		String s =new String() ;
+		String s = new String() ;
 		for(Deal i : deals)
 		{
-			s=s+i.toString()+'\n';
+			s += i.toString() + '\n';
 		}
-		
 		return s;
 	}
 	
-	public static void main(String[] args) 
+	public static void main(String[] args) //РІСЂРµРјРµРЅРЅРѕРµ
 	{
 		Database.PreLoad();
-		
-		
 		List<Deal> b=new ArrayList<>();
-		
-		for(int j=0;j<3;j++)
+		for(int j = 0; j < 3; j++)
 		{
-		HashSet<TaskReport> tr = new HashSet<>();
-		for(int i=0; i<4;i++)
-		{
-			TaskReport e = new TaskReport(new Date(0),new Date(20));
-			tr.add(e);
+			HashSet<TaskReport> tr = new HashSet<>();
+			for(int i = 0; i < 4; i++)
+			{
+				TaskReport e = new TaskReport(new Date(0),new Date(20));
+				tr.add(e);
+			}
+			Deal thing=new Deal("Death", 1931707, "Smert-smert-smert", tr);
+			b.add(thing);
 		}
-		Deal thing=new Deal("Death",1931707,"Smert-smert-smert", tr);
-		b.add(thing);
-		}
-	
 		Database a=new Database(b);
-		
-		try {
-		a.save();
-		}
-		catch(IOException e)
+		try 
 		{
+			a.save();
+		}
+		catch(IOException e) {
 			System.out.println(e.getMessage());
 			System.exit(0);
 		}
-		
 		Database d=new Database();
-		try {
-		d.load();
+		try 
+		{
+			d.load();
 		}
 		catch(Exception e)
 		{
