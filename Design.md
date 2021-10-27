@@ -2,6 +2,8 @@
 
 [Ссылка на фигму](https://www.figma.com/file/N2UCjqmfz43F2lxwAORUJj/%D0%95%D0%BB%D0%B5%D0%BD%D0%B0-%D0%94%D0%B0%D0%BD%D0%B8%D0%BB%D0%B5%D0%BD%D0%BA%D0%BE's-team-library?node-id=725%3A131)
 
+![image](https://user-images.githubusercontent.com/80381507/139118737-a01d90ee-7b91-43ae-a983-32c55b0ba85e.png)
+
 Начальный экран при запуске приложения 
 
 ![image](https://user-images.githubusercontent.com/80381507/138937388-6bf522af-0e79-4f0a-ad1c-b2bf30befa33.png)
@@ -18,3 +20,8 @@
 Всплывающее меню
 
 ![image](https://user-images.githubusercontent.com/80381507/138937679-8ffc2def-fa73-4285-af69-7ae92bade68f.png)
+
+Таймер
+
+![image](https://user-images.githubusercontent.com/80381507/139118451-1d537528-ec87-4037-a302-32f56d82c510.png)
+![image](https://user-images.githubusercontent.com/80381507/139118492-7a54589d-e90b-499c-b0bb-c12881abf117.png)
