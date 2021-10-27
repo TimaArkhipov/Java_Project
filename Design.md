@@ -2,6 +2,8 @@
 
 [Ссылка на фигму](https://www.figma.com/file/N2UCjqmfz43F2lxwAORUJj/%D0%95%D0%BB%D0%B5%D0%BD%D0%B0-%D0%94%D0%B0%D0%BD%D0%B8%D0%BB%D0%B5%D0%BD%D0%BA%D0%BE's-team-library?node-id=725%3A131)
 
+![image](https://user-images.githubusercontent.com/80381507/139118737-a01d90ee-7b91-43ae-a983-32c55b0ba85e.png)
+
 Начальный экран при запуске приложения 
 
 ![image](https://user-images.githubusercontent.com/80381507/138937388-6bf522af-0e79-4f0a-ad1c-b2bf30befa33.png)
