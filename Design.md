@@ -18,3 +18,8 @@
 Всплывающее меню
 
 ![image](https://user-images.githubusercontent.com/80381507/138937679-8ffc2def-fa73-4285-af69-7ae92bade68f.png)
+
+Таймер
+
+![image](https://user-images.githubusercontent.com/80381507/139118451-1d537528-ec87-4037-a302-32f56d82c510.png)
+![image](https://user-images.githubusercontent.com/80381507/139118492-7a54589d-e90b-499c-b0bb-c12881abf117.png)
