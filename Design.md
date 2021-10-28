@@ -38,3 +38,7 @@
 ![image](https://user-images.githubusercontent.com/80381507/139328283-bb38fc78-28bc-407e-b8ef-3033f56a990b.png)
 ![image](https://user-images.githubusercontent.com/80381507/139328328-b3f6f340-ebc3-4b6d-a244-924a9d31afc1.png)
 ![image](https://user-images.githubusercontent.com/80381507/139328373-8011574e-aa33-4f63-836b-19ef70cb01c6.png)
+
+Старт дела
+
+![image](https://user-images.githubusercontent.com/80381507/139328647-6c52ca37-70fa-42c1-a7ce-94ba011e30d1.png)
