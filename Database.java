@@ -25,11 +25,11 @@ public class Database implements Externalizable {
 	public static void PreLoad()
 	{		 
 	        FileInputStream fileInputStream;
-	        //èíèöèàëèçèðóåì ñïåöèàëüíûé îáúåêò Properties
-	        //òèïà Hashtable äëÿ óäîáíîé ðàáîòû ñ äàííûìè
+	        //инициализируем специальный объект Properties
+	        //типа Hashtable для удобной работы с данными
 	        Properties prop = new Properties();
 	        try {
-	            //îáðàùàåìñÿ ê ôàéëó è ïîëó÷àåì äàííûå
+	            //обращаемся к файлу и получаем данные
 	            fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
 	            prop.load(fileInputStream);
 	 
