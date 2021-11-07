@@ -37,3 +37,7 @@
 
 # Материалы
 [Диаграмма последовательности](https://drive.google.com/drive/folders/1SvEpxfpNcSAkrJdWQPgp3U-fptQfjuxL)
+
+## Четвертая лабораторная:
+[Обоснование выбора модели жизненного цикла](https://docs.google.com/document/d/1hVRtivi0QyPNCIXgUajYslg5ZxIGwWpT2D2azzXEsWQ/edit?usp=sharing)
+
