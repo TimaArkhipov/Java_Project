@@ -79,7 +79,7 @@ public class Database implements Externalizable {
 	}
 	@Override
 	public void writeExternal(ObjectOutput newOutput) throws IOException {
-		out.writeObject(this.deals.size());
+		newOutput.writeObject(this.deals.size());
 		for(Deal i : deals)
 		{
 			i.writeExternal(newOutput);
@@ -88,8 +88,8 @@ public class Database implements Externalizable {
 	}
 	@Override
 	public void readExternal(ObjectInput newInput) throws IOException, ClassNotFoundException {
-		int count=(int)in.readObject();
-		for(int i=0; i < count; i++)
+		int count = (int) newInput.readObject();
+		for(int i = 0; i < count; i++)
 		{
 			Deal m = new Deal();
 			m.readExternal(newInput);
@@ -110,7 +110,7 @@ public class Database implements Externalizable {
 	public static void main(String[] args) //временное
 	{
 		Database.PreLoad();
-		List<Deal> b=new ArrayList<>();
+		List<Deal> b = new ArrayList<>();
 		for(int j = 0; j < 3; j++)
 		{
 			HashSet<TaskReport> tr = new HashSet<>();
