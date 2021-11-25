@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication; //после com.example. надо писать <имя своего проекта>
 
 import java.io.Externalizable;
 import java.io.FileInputStream;
@@ -29,11 +29,11 @@ public class Database implements Externalizable {
 	public static void PreLoad()
 	{		 
 	        FileInputStream fileInputStream;
-	        //�������������� ����������� ������ Properties
-	        //���� Hashtable ��� ������� ������ � �������
+          //инициализируем специальный объект Properties
+	        //типа Hashtable для удобной работы с данными
 	        Properties prop = new Properties();
 	        try {
-	            //���������� � ����� � �������� ������
+	            //обращаемся к файлу и получаем данные
 	            fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
 	            prop.load(fileInputStream);
 	 
@@ -51,16 +51,11 @@ public class Database implements Externalizable {
 		return deals;
 	}
 
-	public void save() throws IOException
-	{
-		
-		FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+	public void save() throws IOException {
+		  FileOutputStream fileOutputStream = new FileOutputStream(fileName);
 	    ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 	    objectOutputStream.writeObject(deals);
 	    objectOutputStream.close();
-		
-		
-		
 	}
 	
 	
@@ -70,11 +65,9 @@ public class Database implements Externalizable {
 		FileInputStream fileInputStream=null;
 		ObjectInputStream objectInputStream=null;
 		try {
-		fileInputStream = new FileInputStream(fileName);
-		objectInputStream = new ObjectInputStream(fileInputStream);
+		  fileInputStream = new FileInputStream(fileName);
+		  objectInputStream = new ObjectInputStream(fileInputStream);
 	    this.deals=(List<Deal>) objectInputStream.readObject();
-	    
-	    
 		}
 		catch(Exception e)
 		{
@@ -86,25 +79,24 @@ public class Database implements Externalizable {
 		}
 		
 	}
+  
 	@Override
-	public void writeExternal(ObjectOutput out) throws IOException {
-		out.writeObject(this.deals.size());
+	public void writeExternal(ObjectOutput newOutput) throws IOException {
+		newOutput.writeObject(this.deals.size());
 		for(Deal i : deals)
 		{
-			i.writeExternal(out);
+			i.writeExternal(newOutput);
 		}
-		
 	}
 	@Override
-	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		int count=(int)in.readObject();
-		System.out.println("Good6");
-		for(int i=0; i<count;i++)
+	public void readExternal(ObjectInput newInput) throws IOException, ClassNotFoundException {
+		int count = (int) newInput.readObject();
+		for(int i = 0; i < count; i++)
 		{
 			Deal m = new Deal();
-			m.readExternal(in);
+			m.readExternal(newInput);
 			deals.add(m);
-			System.out.println("Goodit");
+			//System.out.println("Goodit");
 		}
 		
 	}
@@ -113,28 +105,24 @@ public class Database implements Externalizable {
 		String s = "";
 		for(Deal i : deals)
 		{
-			s=s+i.toString()+'\n';
-		}
-		
+        s += i.toString()+'\n';
+    }
 		return s;
 	}
 	
 	public static void main(String[] args)
 	{
 		Database.PreLoad();
-		
-		
-		List<Deal> b=new ArrayList<>();
-		
-		for(int j=0;j<3;j++)
+		List<Deal> b = new ArrayList<>();
+		for(int j = 0; j < 3; j++)
 		{
 		HashSet<TaskReport> tr = new HashSet<>();
-		for(int i=0; i<4;i++)
+		for(int i = 0; i < 4; i++)
 		{
-			TaskReport e = new TaskReport(new Date(0),new Date(20));
+			TaskReport e = new TaskReport(new Date(0), new Date(20));
 			tr.add(e);
 		}
-		Deal thing=new Deal("Death",1931707,"Smert-smert-smert", tr);
+		Deal thing = new Deal("Death", 1931707, "Smert-smert-smert", tr);
 		b.add(thing);
 		}
 	
@@ -159,8 +147,5 @@ public class Database implements Externalizable {
 			System.exit(0);
 		}
 		System.out.println(d.toString());
-		
-		
-	
 	}
 }
