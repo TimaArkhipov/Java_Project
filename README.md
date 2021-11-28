@@ -41,7 +41,3 @@
 ## Четвертая лабораторная:
 [Обоснование выбора модели жизненного цикла](https://docs.google.com/document/d/1hVRtivi0QyPNCIXgUajYslg5ZxIGwWpT2D2azzXEsWQ/edit?usp=sharing)
 
-## Тесты 
-[Тестирование интерфейса](https://docs.google.com/document/d/1snuTcfGKu6jzK_g3PjxKadyJ4IFUrPnRsCkaDr2DuKY/edit?usp=sharing)
-
-[Тестирование черный ящик](https://vk.com/away.php?to=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1uBqkC-5AxBBiFYDQ_H77hLrhITw5_Dc86ZNS9MhqPCA%2Fedit%3Fusp%3Dsharing)
