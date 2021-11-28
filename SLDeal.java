@@ -9,16 +9,17 @@ import java.io.ObjectOutputStream;
 
 public interface SLDeal {
 
+    public static void createFile(Deal deal) throws IOException {
+        String fileName=deal.getName()+".bin";
+        File f=new File(fileName);
+        f.createNewFile();
+    }
+
 
     public static void save(Deal deal) throws IOException
     {
 
         String fileName=deal.getName()+".bin";
-
-        File f=new File(fileName);
-        f.createNewFile();
-
-
         FileOutputStream fileOutputStream = new FileOutputStream(fileName);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(deal);
