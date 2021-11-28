@@ -1,6 +1,5 @@
-package com.example.myapplication;
+package com.example.firstapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,42 +10,46 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.firstapp.core.TaskReport;
+
 import java.util.Date;
 
 public class MainActivity3 extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
+    TaskReport taskReport;
     SeekBar bar;
-    TextView grad;
+    TextView grade;
     Button end;
+    EditText description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        bar=(SeekBar) findViewById(R.id.seekBar);
+        bar = (SeekBar) findViewById(R.id.seekBar);
         bar.setOnSeekBarChangeListener(this);
-        grad=(TextView) findViewById(R.id.grade);
-        end=(Button)findViewById(R.id.button2);
+        grade = (TextView) findViewById(R.id.grade);
+        end = (Button) findViewById(R.id.button2);
+        description = (EditText) findViewById(R.id.description);
         end.setOnClickListener(new View.OnClickListener(){
             @Override
-
             public void onClick(View v) {
-
-                Date db=new Date();
-
+                taskReport.setComment(description.getText().toString());
+                /*
+                taskReport.setDateStart();
+                taskReport.setDateStop();
+                 */
+                Date db = new Date();
                 Intent intent = new Intent(MainActivity3.this, MainActivity.class);
-
                 startActivity(intent);
-
             }
-
         });
     }
 
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        grad.setText(String.valueOf(progress)+"/"+String.valueOf(seekBar.getMax()));
-
+        grade.setText(String.valueOf(progress) + "/" + String.valueOf(seekBar.getMax()));
+        taskReport.setGrade(progress);
     }
 
     @Override
