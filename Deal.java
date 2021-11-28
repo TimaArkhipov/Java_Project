@@ -1,59 +1,83 @@
+package com.example.timetracker;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.FileReader;
+
 import java.io.Externalizable;
+
 import java.io.IOException;
 import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
+
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
+import java.util.List;
 
 public class Deal implements Externalizable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+	private static int countOfDeal =0;
 	private String name;
-	private int id;
+	private int pid;
 	private String description;
-	
-	private HashSet<TaskReport> taskReport = new HashSet<TaskReport>();
-	
+
+	//tr = task report
+	private HashSet<TaskReport> taskReport = new HashSet<>();
+
 	public Deal(){
-		
+		this.countOfDeal +=1;
+		pid= countOfDeal;
+
 	}
-	
+
+	public void formId()
+	{
+
+	}
 
 	public Deal(String name, int id, String description, HashSet<TaskReport> tr) {
 		super();
 		this.name = name;
-		this.id = id;
+		this.countOfDeal +=1;
+		pid=this.countOfDeal;
 		this.description = description;
 		this.taskReport = tr;
+	}
+
+
+
+
+
+	public Deal(String name, String description) {
+		super();
+		this.name = name;
+		this.countOfDeal +=1;
+		pid=this.countOfDeal;
+		this.description = description;
 	}
 
 	public void setName(String new_name) {
 		name = new_name;
 	}
-	
 	public void setDescription(String new_desc) {
 		description = new_desc;
 	}
-	
 	//private void makeId() {}
-	
 	public String getName() {
 		return name;
 	}
-	
 	public String getDescription() {
 		return description;
 	}
 
 	public int getId() {
-		return id;
+		return pid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+
 
 	public HashSet<TaskReport> getTr() {
 		return taskReport;
@@ -62,48 +86,53 @@ public class Deal implements Externalizable {
 	public void setTr(HashSet<TaskReport> tr) {
 		this.taskReport = tr;
 	}
-	
 	@Override
 	public String toString() {
-		String s = new String();
+		String s =new String() ;
 		for(TaskReport i : taskReport)
-			s += i.toString();
+		{
+			s+=i.toString();
+		}
+
 		return "Name of deal: " + name + "\n" +
-				"Description of deal: " + description + "\n" + s;
-				//"ID of deal: " + Integer.toString(id) + "\n";
+				"Description of deal: " + description + "\n"+s;
+		//"ID of deal: " + Integer.toString(id) + "\n";
 	}
-//âûâîä â ôàéë
-/*	public void outputToFile(String fileName) {
-		try (FileWriter writer = new FileWriter(fileName, false)) { 
+	//input to file
+	public void outputToFile(String fileName) {
+		try (FileWriter writer = new FileWriter(fileName, false)) {
 			writer.write(this.toString());
 			writer.flush();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-//÷òåíèå ñ ôàéëà
-	public void inputToFile(String fileName) {//íå äîïèñàíî!!!
-		try (FileReader reader = new FileReader(fileName)) { 
-			
-			
+	//read from file
+	public void inputToFile(String fileName) {//не дописано!!!
+		try (FileReader reader = new FileReader(fileName)) {
+
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-*/
-//ñåðèàëèçàöèÿ
+
+	//serialization
 	@Override
 	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(this.getName());
 		out.writeObject(this.getDescription());
 		out.writeObject(this.taskReport.size());
 		for(TaskReport i : taskReport)
+		{
 			i.writeExternal(out);
+		}
 	}
 
-	//äåñåðèàëèçàöèÿ
+	//deserialization
 	@Override
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+		// TODO Auto-generated method stub
 		int count;
 		name=(String)in.readObject();
 		description=(String)in.readObject();
@@ -114,6 +143,9 @@ public class Deal implements Externalizable {
 			e.readExternal(in);
 			taskReport.add(e);
 		}
+
+
+
 	}
-	
+
 }
