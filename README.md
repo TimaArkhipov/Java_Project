@@ -42,4 +42,7 @@
 [Обоснование выбора модели жизненного цикла](https://docs.google.com/document/d/1hVRtivi0QyPNCIXgUajYslg5ZxIGwWpT2D2azzXEsWQ/edit?usp=sharing)
 
 ## Тесты 
-[Тестирование интерфейса](https://docs.google.com/document/d/1snuTcfGKu6jzK_g3PjxKadyJ4IFUrPnRsCkaDr2DuKY/edit?usp=sharing)
+[Тестирование интерфейса по модели GOMS](https://docs.google.com/document/d/1l6pA_kBMQbt00SNNvHBhhQ-kMNDUyP3tHpb-qypEb5U/edit?usp=sharing)
+[Тестирование интерфейса на эксперементальной группе пользователей] (https://docs.google.com/spreadsheets/d/1G9ccP2ZICahI-4eLfCCOlGZxYkw4FDfuo4R-2K1Idao/edit?usp=sharing)
+
+
