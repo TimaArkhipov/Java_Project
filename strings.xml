@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="start_timer">Start Timer</string>
+    <string name="choose_time">Choose Time</string>
+    <string name="deal">Deal</string>
+    <string name="m">M</string>
+    <string name="s">S</string>
+    <string name="h">H</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="grade">0/5</string>
+    <string name="timer">TIMER</string>
+    <string name="start">Start</string>
+    <string name="secundomer">Secundomer</string>
+    <string name="new_deal">New Deal</string>
+    <string name="name">Name</string>
+    <string name="create">Create</string>
+    <string name="description">Description</string>
+    <string name="TIME">TextView</string>
+</resources>
