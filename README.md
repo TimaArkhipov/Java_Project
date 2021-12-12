@@ -40,4 +40,3 @@
 
 ## Четвертая лабораторная:
 [Обоснование выбора модели жизненного цикла](https://docs.google.com/document/d/1hVRtivi0QyPNCIXgUajYslg5ZxIGwWpT2D2azzXEsWQ/edit?usp=sharing)
-
