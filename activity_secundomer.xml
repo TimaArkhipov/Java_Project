@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/textTimeS"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SecundomerActivity">
+
 
 
     <Button
@@ -22,6 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/deal" />
 
     <TextView
+
         android:id="@+id/textNameSecundomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +33,7 @@
         android:layout_marginTop="152dp"
         android:layout_marginEnd="152dp"
         android:clickable="true"
+
         android:minHeight="48dp"
         android:text="@string/secundomer"
 
@@ -44,13 +48,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="191dp"
+
         android:layout_marginTop="68dp"
+
         android:layout_marginEnd="174dp"
         android:text="@string/deal"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/textTextS" />
 
     <Button
@@ -79,6 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textNameSecundomer" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

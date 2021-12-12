@@ -1,12 +1,16 @@
+
 package com.example.timetracker;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,12 +25,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+
 public class SecundomerActivity extends AppCompatActivity {
+
 
     TextView deals;
     Database data;
     boolean f = true;
     int sec=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +54,13 @@ public class SecundomerActivity extends AppCompatActivity {
         }
 
         data=new Database(b);
+
         TextView tim=(TextView) findViewById(R.id.textNameSecundomer);
         tim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SecundomerActivity.this, TimerActivity.class);
+
 
                 startActivity(intent);
 
@@ -62,9 +71,8 @@ public class SecundomerActivity extends AppCompatActivity {
         deals =(TextView) findViewById(R.id.deal);
         registerForContextMenu(deals);
 
+
         TaskReport taskReport = new TaskReport();
-
-
         Button startSec=(Button) findViewById(R.id.start);
         startSec.setOnClickListener(new View.OnClickListener(){
 
@@ -74,6 +82,7 @@ public class SecundomerActivity extends AppCompatActivity {
                 {
                     startSec.setText( "Stop" );
                     f = false;
+
                     Date db=new Date();
                     taskReport.setDateStart(db);
                     Handler handler=new Handler();
@@ -92,16 +101,19 @@ public class SecundomerActivity extends AppCompatActivity {
                         }
                     });
 
+
                 }
                 else
                 {
                     startSec.setText( "Start" );
                     f = true;
+
                     Intent intent = new Intent(SecundomerActivity.this, ReportActivity.class);
                     Date de=new Date();
                     taskReport.setDateStop(de);
                     intent.putExtra("TaskReport",taskReport);
                     intent.putExtra("Deal",deals.getText());
+
 
                     startActivity(intent);
 
@@ -111,6 +123,7 @@ public class SecundomerActivity extends AppCompatActivity {
 
             }
         });
+
 
         Button newDealButtonS=(Button) findViewById(R.id.newDealButtonS);
         newDealButtonS.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +150,7 @@ public class SecundomerActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
@@ -162,4 +176,3 @@ public class SecundomerActivity extends AppCompatActivity {
 
         return super.onContextItemSelected(item);
     }
-}
