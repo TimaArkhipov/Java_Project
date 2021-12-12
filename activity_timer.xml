@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TimerActivity">
-  
-  
+
+
     <Button
         android:id="@+id/newDealButtonT"
         android:layout_width="wrap_content"
@@ -14,9 +14,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="151dp"
-        android:layout_marginBottom="122dp"
         android:text="@string/new_deal"
-        app:layout_constraintBottom_toTopOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,31 +25,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="139dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="119dp"
-        android:layout_marginBottom="228dp"
-        android:text="@string/start_timer"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="START"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMinuts" />
+        app:layout_constraintTop_toBottomOf="@+id/newDealButtonT" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textNameSecundomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
+        android:layout_marginStart="155dp"
 
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginTop="208dp"
+        android:layout_marginEnd="155dp"
         android:clickable="true"
+        android:focusable="true"
+        android:minHeight="48dp"
         android:text="@string/timer"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextMinuts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,65 +55,57 @@
         android:id="@+id/deal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="191dp"
-        android:layout_marginTop="248dp"
-        android:layout_marginEnd="174dp"
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="183dp"
         android:text="@string/deal"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextMinuts" />
 
     <EditText
         android:id="@+id/editTextHours"
         android:layout_width="62dp"
         android:layout_height="55dp"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="60dp"
-        android:layout_marginBottom="134dp"
         android:ems="10"
         android:hint="@string/h"
+        android:importantForAutofill="no"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.459"
+        app:layout_constraintTop_toBottomOf="@+id/textNameSecundomer"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/editTextMinuts"
         android:layout_width="62dp"
         android:layout_height="55dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="134dp"
         android:ems="10"
         android:hint="@string/m"
+        android:importantForAutofill="no"
         android:inputType="number"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/editTextSeconds"
-        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toEndOf="@+id/editTextHours"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/textNameSecundomer"
+        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
 
     <EditText
         android:id="@+id/editTextSeconds"
         android:layout_width="62dp"
         android:layout_height="55dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="133dp"
         android:ems="10"
         android:hint="@string/s"
+        android:importantForAutofill="no"
         android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.453"
+        app:layout_constraintStart_toEndOf="@+id/editTextMinuts"
+        app:layout_constraintTop_toBottomOf="@+id/textNameSecundomer"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

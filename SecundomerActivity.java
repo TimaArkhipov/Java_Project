@@ -1,15 +1,12 @@
-
 package com.example.timetracker;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.app.Dialog;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,23 +14,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-
 public class SecundomerActivity extends AppCompatActivity {
-
 
     TextView deals;
     Database data;
+    private Button newDealButtonS;
     boolean f = true;
+    int sec=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secundomer);
-        List<Deal> b=new ArrayList<>();
+        /*List<Deal> b=new ArrayList<>();
 
 
         for(int j = 0; j < 3 ; j++)
@@ -48,14 +47,12 @@ public class SecundomerActivity extends AppCompatActivity {
             b.add(thing);
         }
 
-        data=new Database(b);
-        TextView tim=(TextView) findViewById(R.id.textView3);
+        data=new Database(b);*/
+        TextView tim=(TextView) findViewById(R.id.textNameSecundomer);
         tim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(SecundomerActivity.this, TimerActivity.class);
-
 
                 startActivity(intent);
 
@@ -65,7 +62,6 @@ public class SecundomerActivity extends AppCompatActivity {
 
         deals =(TextView) findViewById(R.id.deal);
         registerForContextMenu(deals);
-
 
         TaskReport taskReport = new TaskReport();
 
@@ -77,59 +73,99 @@ public class SecundomerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (f)
                 {
-                    startSec.setText( "Stop" );
                     f = false;
-
+                    startSec.setText( "Stop" );
                     Date db=new Date();
                     taskReport.setDateStart(db);
+                    Handler handler=new Handler();
+                    deals.setClickable(f);
+                    newDealButtonS.setClickable(f);
+
+                    TextView timeText = (TextView) findViewById(R.id.textTextS);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            int h=sec/3600;
+                            int m=sec%3600/60;
+                            int s=sec%60;
+                            String time= String.format("%d:%02d:%02d",h,m,s);
+                            timeText.setText(time);
+                            sec=sec+1;
+                            handler.postDelayed(this,1000);
+                        }
+                    });
+
                 }
                 else
                 {
-                    startSec.setText( "Start" );
+
                     f = true;
+                    deals.setClickable(f);
+                    newDealButtonS.setClickable(f);
+                    startSec.setText( "Start" );
                     Intent intent = new Intent(SecundomerActivity.this, ReportActivity.class);
-                    Date de = new Date();
+                    Date de=new Date();
                     taskReport.setDateStop(de);
                     intent.putExtra("TaskReport",taskReport);
                     intent.putExtra("Deal",deals.getText());
+
                     startActivity(intent);
+
                 }
+
+
+
             }
         });
-        Button newDealButtonS=(Button) findViewById(R.id.newDealButtonS);
+
+        newDealButtonS=(Button) findViewById(R.id.newDealButtonS);
         newDealButtonS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog newDealDialog = new Dialog(SecundomerActivity.this);
+                Dialog newDealDialog= new Dialog(SecundomerActivity.this);
                 newDealDialog.setContentView(R.layout.new_deal_layout);
                 newDealDialog.show();
 
-                EditText name = (EditText) newDealDialog.findViewById(R.id.editTextName);
-                EditText description = (EditText) newDealDialog.findViewById(R.id.editTextDescription);
-                Button createNewDeal = (Button) newDealDialog.findViewById(R.id.createDeal);
+                EditText name=(EditText) newDealDialog.findViewById(R.id.editTextName);
+                EditText description=(EditText) newDealDialog.findViewById(R.id.editTextDescription);
+                Button createNewDeal =(Button) newDealDialog.findViewById(R.id.createDeal);
                 createNewDeal.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Deal thing2 = new Deal(name.getText().toString(), description.getText().toString());
+                        Deal thing2=new Deal(name.getText().toString(),description.getText().toString());
                         data.getDeals().add(thing2);
                         newDealDialog.cancel();
                     }
                 });
+
+
+
             }
         });
+
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        for(Deal d: data.getDeals()) {
+
+
+
+
+        for(Deal d: data.getDeals())
+        {
             menu.add(0,d.getId(),0,d.getName());
+
         }
+
+
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+
         deals.setText(item.getTitle().toString()+item.getItemId());
+
         return super.onContextItemSelected(item);
     }
 }

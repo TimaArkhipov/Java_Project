@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textTimeS"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TimerActivity">
+    tools:context=".SecundomerActivity">
 
 
     <Button
@@ -12,29 +13,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="139dp"
-        android:layout_marginTop="178dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="119dp"
         android:text="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deal" />
+        app:layout_constraintTop_toBottomOf="@+id/newDealButtonS" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textNameSecundomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="152dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="155dp"
         android:clickable="true"
         android:minHeight="48dp"
         android:text="@string/secundomer"
 
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,15 +42,15 @@
         android:id="@+id/deal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="191dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="174dp"
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="183dp"
         android:text="@string/deal"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textTextS" />
 
     <Button
         android:id="@+id/newDealButtonS"
@@ -59,12 +59,25 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="151dp"
-        android:layout_marginBottom="122dp"
         android:text="@string/new_deal"
-        app:layout_constraintBottom_toTopOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deal" />
+
+    <TextView
+        android:id="@+id/textTextS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="180dp"
+        android:text="0:00:00"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNameSecundomer" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
