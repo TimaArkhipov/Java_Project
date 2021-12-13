@@ -11,73 +11,68 @@
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="139dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="119dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="162dp"
         android:text="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newDealButtonS" />
 
     <TextView
         android:id="@+id/textNameSecundomer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
 
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="155dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="60dp"
+
+        android:layout_marginEnd="136dp"
         android:clickable="true"
         android:minHeight="48dp"
         android:text="@string/secundomer"
-
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/deal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="182dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="183dp"
-        android:text="@string/deal"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTextS" />
-
     <Button
         android:id="@+id/newDealButtonS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="151dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="136dp"
         android:text="@string/new_deal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deal" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerS" />
 
     <TextView
         android:id="@+id/textTextS"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="180dp"
-        android:text="0:00:00"
+        android:layout_height="53dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="140dp"
+        android:text="00:00:00"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textNameSecundomer" />
+
+    <Spinner
+        android:id="@+id/spinnerS"
+        android:layout_width="223dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="94dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTextS"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

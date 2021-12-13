@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateNoteActivity" >
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:hint="@string/writeYourNoteHere"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="38dp" />
+
+    <!--
+    android:autofillHints="" //Не нравится и не работает как android:hint
+    android:ems="10" //Если в графе android:layout_width стоит "match_parent",
+                            то регулирует ширину строки
+    android:lines = "2" //Позволяет ограничить количество строк на экране
+    android:title="Создание заметки" // Не работает для activity, их заголовок
+                                        изменяется в файле AndroidManifest.xml
+    -->
+</LinearLayout>
