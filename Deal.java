@@ -1,9 +1,16 @@
-import java.io.FileWriter;
-import java.io.FileReader;
+package com.example.timetracker.core;
+
+import android.content.Context;
+
 import java.io.Externalizable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 
 public class Deal implements Externalizable {
@@ -11,22 +18,29 @@ public class Deal implements Externalizable {
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
-	private int id;
+	private int pid;
+	private static int count;
 	private String description;
 	
-	private HashSet<TaskReport> taskReport = new HashSet<TaskReport>();
+	private HashSet<TaskReport> taskReportSet = new HashSet<TaskReport>();
 	
-	public Deal(){
-		
-	}
-	
+	public Deal(){ }
 
-	public Deal(String name, int id, String description, HashSet<TaskReport> tr) {
+	public Deal(String name, String description) {
 		super();
+		count++;
+		pid = count;
 		this.name = name;
-		this.id = id;
 		this.description = description;
-		this.taskReport = tr;
+	}
+
+	public Deal(String name, String description, HashSet<TaskReport> tr) {
+		super();
+		count++;
+		pid = count;
+		this.name = name;
+		this.description = description;
+		this.taskReportSet = tr;
 	}
 
 	public void setName(String new_name) {
@@ -37,8 +51,6 @@ public class Deal implements Externalizable {
 		description = new_desc;
 	}
 	
-	//private void makeId() {}
-	
 	public String getName() {
 		return name;
 	}
@@ -47,73 +59,95 @@ public class Deal implements Externalizable {
 		return description;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	public int getId() { return pid; }
 
 	public HashSet<TaskReport> getTr() {
-		return taskReport;
+		return taskReportSet;
 	}
 
 	public void setTr(HashSet<TaskReport> tr) {
-		this.taskReport = tr;
+		this.taskReportSet = tr;
 	}
 	
 	@Override
 	public String toString() {
 		String s = new String();
-		for(TaskReport i : taskReport)
+		for(TaskReport i : taskReportSet)
 			s += i.toString();
 		return "Name of deal: " + name + "\n" +
 				"Description of deal: " + description + "\n" + s;
 				//"ID of deal: " + Integer.toString(id) + "\n";
 	}
-//âûâîä â ôàéë
-/*	public void outputToFile(String fileName) {
-		try (FileWriter writer = new FileWriter(fileName, false)) { 
-			writer.write(this.toString());
-			writer.flush();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-//÷òåíèå ñ ôàéëà
-	public void inputToFile(String fileName) {//íå äîïèñàíî!!!
-		try (FileReader reader = new FileReader(fileName)) { 
-			
-			
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-*/
-//ñåðèàëèçàöèÿ
-	@Override
-	public void writeExternal(ObjectOutput out) throws IOException {
-		out.writeObject(this.getName());
-		out.writeObject(this.getDescription());
-		out.writeObject(this.taskReport.size());
-		for(TaskReport i : taskReport)
-			i.writeExternal(out);
+
+	public void saveTaskReport(String fileName) throws IOException
+	{
+		FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		objectOutputStream.writeObject(taskReportSet);
+		objectOutputStream.close();
 	}
 
-	//äåñåðèàëèçàöèÿ
-	@Override
-	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		int count;
-		name=(String)in.readObject();
-		description=(String)in.readObject();
-		count=(int)in.readObject();
-		for(int i=0; i<count;i++)
+	public void loadTaskReport(String fileName) throws Exception
+	{
+		FileInputStream fileInputStream = null;
+		ObjectInputStream objectInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(fileName);
+			objectInputStream = new ObjectInputStream(fileInputStream);
+			taskReportSet = (HashSet<TaskReport>) objectInputStream.readObject();
+		}
+		catch(Exception e)
 		{
-			TaskReport e = new TaskReport();
-			e.readExternal(in);
-			taskReport.add(e);
+			throw new Exception(" Can't read data");
+		}
+		finally
+		{
+			objectInputStream.close();
 		}
 	}
-	
+
+	public void saveDeal(String filename) throws IOException
+	{
+		FileOutputStream fileOutputStream = new FileOutputStream(filename);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		objectOutputStream.writeObject(this);
+		objectOutputStream.close();
+	}
+
+	public Deal loadDeal(String filename) throws Exception
+	{
+		FileInputStream fileInputStream = null;
+		ObjectInputStream objectInputStream = null;
+		Deal deal = new Deal();
+		try {
+			fileInputStream = new FileInputStream(filename);
+			objectInputStream = new ObjectInputStream(fileInputStream);
+			deal = (Deal) objectInputStream.readObject();
+		}
+		catch(Exception e)
+		{
+			throw new Exception(" Can't read data");
+		}
+		finally
+		{
+			objectInputStream.close();
+		}
+		return deal;
+	}
+
+	//serialization
+	@Override
+	public void writeExternal(ObjectOutput out) throws IOException {
+		out.writeObject(this.name);
+		out.writeObject(this.getDescription());
+		out.writeObject(this.pid);
+	}
+
+	//deserialization
+	@Override
+	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+		name = (String) in.readObject();
+		description = (String) in.readObject();
+		pid = (int) in.readObject();
+	}
 }
