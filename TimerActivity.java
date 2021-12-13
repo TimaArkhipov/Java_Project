@@ -7,11 +7,14 @@ import com.example.timetracker.core.Database;
 import com.example.timetracker.core.Deal;
 import com.example.timetracker.core.TaskReport;
 
+import android.app.Dialog;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -24,6 +27,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,10 +52,10 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        List<Deal> dealList = Arrays.asList(new Deal("Program job",
-                "I make program"),new Deal("Walk",
-                "I walk with my dog"),new Deal("Workout",
-                "I train at the gym"));
+        List<Deal> dealList = Arrays.asList(
+            new Deal("Program job", "I make program"),
+            new Deal("Walk", "I walk with my dog"),
+            new Deal("Workout", "I train at the gym"));
         List<String> nameDealList = new ArrayList<>();
         data = new Database(dealList);
         //deals = (TextView) findViewById(R.id.deal);
@@ -129,15 +133,16 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
                 }*/
 
-                try {
-                    Thread.sleep(deltaDate);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(TimerActivity.this, ReportActivity.class);
-                intent.putExtra("TaskReport", taskReport);
-                String nameSelectedDeal = spinner.getSelectedItem().toString();
-                intent.putExtra("nameDeal", nameSelectedDeal);
+                Intent intent = new Intent(TimerActivity.this, TimeRunActivity.class);
+                intent.putExtra("TaskReport",taskReport);
+                intent.putExtra("Deal",deals.getText());
+                intent.putExtra("timeScip",timeScip);
+                startActivity(intent);
+                
+                //Intent intent = new Intent(TimerActivity.this, ReportActivity.class);
+                //intent.putExtra("TaskReport", taskReport);
+                //String nameSelectedDeal = spinner.getSelectedItem().toString();
+                //intent.putExtra("nameDeal", nameSelectedDeal);
 
                 /*
                 try {
@@ -171,7 +176,27 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                 startActivity(intent);
             }
         });
+        Button newDealButtonT=(Button) findViewById(R.id.newDealButtonT);
+        newDealButtonT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog newDealDialog= new Dialog(TimerActivity.this);
+                newDealDialog.setContentView(R.layout.new_deal_layout);
+                newDealDialog.show();
 
+                EditText name=(EditText) newDealDialog.findViewById(R.id.editTextName);
+                EditText description=(EditText) newDealDialog.findViewById(R.id.editTextDescription);
+                Button createNewDeal =(Button) newDealDialog.findViewById(R.id.createDeal);
+                createNewDeal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Deal thing2=new Deal(name.getText().toString(),description.getText().toString());
+                        data.getDeals().add(thing2);
+                        newDealDialog.cancel();
+                    }
+                });
+            }
+        });
 
 
     }
