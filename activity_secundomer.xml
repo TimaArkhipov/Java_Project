@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".SecundomerActivity">
 
-
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
@@ -30,8 +29,10 @@
 
         android:layout_marginEnd="136dp"
         android:clickable="true"
+
         android:minHeight="48dp"
         android:text="@string/secundomer"
+
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

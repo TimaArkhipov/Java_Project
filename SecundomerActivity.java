@@ -15,18 +15,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-
 public class SecundomerActivity extends AppCompatActivity {
 
     Spinner spinner;
     private Button newDealButtonS;
     boolean f = true;
     int sec=0;
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +47,11 @@ public class SecundomerActivity extends AppCompatActivity {
             nameDealList.add(thing);
         }
 
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameDealList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner = (Spinner) findViewById(R.id.spinnerS);
         spinner.setAdapter(adapter);
-
 
         TextView tim=(TextView) findViewById(R.id.textNameSecundomer);
         tim.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +91,31 @@ public class SecundomerActivity extends AppCompatActivity {
                         }
                     });
 
+                    Date db=new Date();
+                    taskReport.setDateStart(db);
+                    Handler handler=new Handler();
+
+                    TextView timeText = (TextView) findViewById(R.id.textTextS);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            int h=sec/3600;
+                            int m=sec%3600/60;
+                            int s=sec%60;
+                            String time= String.format("%d:%02d:%02d",h,m,s);
+                            timeText.setText(time);
+                            sec=sec+1;
+                            handler.postDelayed(this,1000);
+                        }
+                    });
+
+
                 }
                 else
                 {
 
                     f = true;
+
                     spinner.setClickable(f);
                     newDealButtonS.setClickable(f);
                     startSec.setText( "Старт" );
@@ -105,6 +125,7 @@ public class SecundomerActivity extends AppCompatActivity {
                     taskReport.setDateStop(de);
                     intent.putExtra("TaskReport",taskReport);
                     intent.putExtra("Deal",nameSelectedDeal);
+
 
                     startActivity(intent);
 
@@ -122,7 +143,6 @@ public class SecundomerActivity extends AppCompatActivity {
                 Dialog newDealDialog= new Dialog(SecundomerActivity.this);
                 newDealDialog.setContentView(R.layout.new_deal_layout);
                 newDealDialog.show();
-
                 EditText name=(EditText) newDealDialog.findViewById(R.id.editTextName);
                 EditText description=(EditText) newDealDialog.findViewById(R.id.editTextDescription);
                 Button createNewDeal =(Button) newDealDialog.findViewById(R.id.createDeal);
@@ -134,6 +154,7 @@ public class SecundomerActivity extends AppCompatActivity {
                         newDealDialog.cancel();
                     }
                 });
+
 
 
 

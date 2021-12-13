@@ -10,10 +10,10 @@ import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
 
 import java.io.File;
 import java.io.FileWriter;

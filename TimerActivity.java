@@ -3,8 +3,6 @@ package com.example.timetracker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-
-
 import android.app.Dialog;
 
 import android.annotation.SuppressLint;
@@ -122,17 +120,20 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                     S = 0;
                 }
 
+
                 if (M <= 60 && S <= 60) {
 
                     long deltaDate = H * 60 * 60 * 1000 + M * 60 * 1000 + S * 1000;
                     Date dateEnd = new Date(dateStart.getTime() + deltaDate);
                     taskReport.setDateStop(dateEnd);
 
+
                 /*while(!dateEnd.equals(new Date()))
                 {
                    System.out.println("loop");
 
                 }*/
+
                     String nameSelectedDeal = spinner.getSelectedItem().toString();
                     Intent intent = new Intent(TimerActivity.this, TimeRunActivity.class);
                     intent.putExtra("TaskReport",taskReport);
@@ -167,6 +168,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                 //Intent intent = new Intent(TimerActivity.this, ReportActivity.class);
                 //intent.putExtra("TaskReport", taskReport);
 
+
                 //intent.putExtra("nameDeal", nameSelectedDeal);
 
                 /*
@@ -179,7 +181,6 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                     e.printStackTrace();
                 }
                 */
-
 
 
             }

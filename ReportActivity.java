@@ -14,9 +14,6 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,8 +25,8 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 
-public class ReportActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener {
 
+public class ReportActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener {
     TaskReport taskReport;
     RatingBar bar;
     Button end;
@@ -38,6 +35,7 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
+
         bar = (RatingBar) findViewById(R.id.ratingBar);
         bar.setOnRatingBarChangeListener( this);
         end = (Button) findViewById(R.id.button2);
@@ -113,8 +111,10 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
                 } catch (ClassNotFoundException | IOException e) {
                     e.printStackTrace();
                 }
+
                 Intent intent = new Intent(ReportActivity.this, MenuActivity.class);
                 startActivity(intent);
+
 
 
             }
@@ -133,6 +133,7 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
         }
     }
 
+
     public TaskReport loadToFile(String fileName) {
         FileInputStream fileInputStream = null;
         try {
@@ -144,6 +145,7 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
             e.printStackTrace();
         }
         return taskReport;
+
     }
     /*
     private void saveSharedPreferences(TaskReport taskReport)
@@ -157,8 +159,10 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
         prefEdit.putLong("DateStop", taskReport.getDateStop().getTime());
         prefEdit.apply();
 
+
         File myPath = new File(Environment.getExternalStorageDirectory().toString());
         File myFile = new File(myPath, "MySharedPreferences");
+
 
         try
         {

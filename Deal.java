@@ -1,7 +1,6 @@
 package com.example.timetracker;
 
 import android.content.Context;
-
 import java.io.Externalizable;
 import java.io.File;
 import java.io.FileInputStream;
