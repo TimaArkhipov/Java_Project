@@ -1,16 +1,19 @@
-package com.example.myapplication;
+
+package com.example.timetracker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class TimerActivity extends AppCompatActivity implements SLDeal  {
 
     TextView deals;
     Database data;
@@ -44,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
         data=new Database(b);
 
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_timer);
 
         deals =(TextView) findViewById(R.id.deal);
         registerForContextMenu(deals);
 
-        TextView tim=(TextView) findViewById(R.id.textView3);
+        TextView tim=(TextView) findViewById(R.id.textNameSecundomer);
         tim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Secundomer.class);
+                Intent intent = new Intent(TimerActivity.this, SecundomerActivity.class);
                 startActivity(intent);
 
             }
@@ -64,61 +67,67 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Date db=new Date();
+                TaskReport taskReport=new TaskReport();
+
+                Date dateBegin=new Date();
+                taskReport.setDateStart(dateBegin);
                 EditText hour=(EditText) findViewById(R.id.editTextHours);
                 EditText min=(EditText) findViewById(R.id.editTextMinuts);
                 EditText sec=(EditText) findViewById(R.id.editTextSeconds);
-                int H,M,S;
-                try{
-                    H = Integer.parseInt( hour.getText().toString());
-                }
-                catch(Exception e) {
-                    H=0;
-                }
-                try {
-                    M = Integer.parseInt(min.getText().toString());
-                }
-                catch(Exception e) {
-                    M=0;
-                }
-                try{
-                    S= Integer.parseInt( sec.getText().toString() );
-                }
-                catch(Exception e)
-                {
-                    S=0;
-                }
-                Date dateEnd=new Date(db.getTime()+H*60*60*1000+M*60*1000+S*1000);
+                long H=0,M=0,S=0;
 
-                TextView v1=(TextView) findViewById(R.id.textView3);
-                v1.setText("Time end: \n"+dateEnd.toString());
+                    try {
+                        H = Integer.parseInt(hour.getText().toString());
+                    } catch (Exception e) {
+                        H = 0;
+                    }
+                    try {
+                        M = Integer.parseInt(min.getText().toString());
+                    } catch (Exception e) {
+                        M = 0;
+                    }
+                    try {
+                        S = Integer.parseInt(sec.getText().toString());
+                    } catch (Exception e) {
+                        S = 0;
+                    }
 
 
+                long timeScip = H*60*60*1000+M*60*1000+S*1000;
+                Date dateEnd=new Date(dateBegin.getTime()+timeScip);
+                taskReport.setDateStop(dateEnd);
 
-
-
-
-
-
-
-                /*while(!dateEnd.equals(new Date()))
-                {
-                   System.out.println("loop");
-
-                }*/
-                Intent intent = new Intent(MainActivity.this, MainActivity3.class);
-                try {
-                    Thread.sleep(H*60*60*1000+M*60*1000+S*1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+                Intent intent = new Intent(TimerActivity.this, TimeRunActivity.class);
+                intent.putExtra("TaskReport",taskReport);
+                intent.putExtra("Deal",deals.getText());
+                intent.putExtra("timeScip",timeScip);
                 startActivity(intent);
-
-
             }
         });
 
+
+
+        Button newDealButtonT=(Button) findViewById(R.id.newDealButtonT);
+        newDealButtonT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog newDealDialog= new Dialog(TimerActivity.this);
+                newDealDialog.setContentView(R.layout.new_deal_layout);
+                newDealDialog.show();
+
+                EditText name=(EditText) newDealDialog.findViewById(R.id.editTextName);
+                EditText description=(EditText) newDealDialog.findViewById(R.id.editTextDescription);
+                Button createNewDeal =(Button) newDealDialog.findViewById(R.id.createDeal);
+                createNewDeal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Deal thing2=new Deal(name.getText().toString(),description.getText().toString());
+                        data.getDeals().add(thing2);
+                        newDealDialog.cancel();
+                    }
+                });
+            }
+        });
 
 
     }
@@ -126,24 +135,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-
-
-
-
            for(Deal d: data.getDeals())
             {
                 menu.add(0,d.getId(),0,d.getName());
-
             }
-
-
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-
         deals.setText(item.getTitle().toString()+item.getItemId());
-
         return super.onContextItemSelected(item);
     }
 }
+
