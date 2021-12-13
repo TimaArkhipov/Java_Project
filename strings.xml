@@ -44,20 +44,23 @@
     <string name="writeYourNoteHere">Напишите здесь вашу заметку</string>
 
 
-    <string name="start_timer">Start Timer</string>
-    <string name="choose_time">Choose Time</string>
+    <string name="start_timer">Старт таймера</string>
+    <string name="choose_time">Выберите время</string>
     <string name="deal">Deal</string>
-    <string name="m">M</string>
-    <string name="s">S</string>
-    <string name="h">H</string>
+    <string name="m">М</string>
+    <string name="s">С</string>
+    <string name="h">Ч</string>
     <string name="title_activity_main2">MainActivity2</string>
     <!-- Strings used for fragments for navigation -->
 
     <string name="grade">0/5</string>
-    <string name="timer">TIMER</string>
-    <string name="start">Start</string>
-    <string name="description">Description</string>
-    <string name="secundomer">Secundomer</string>
+    <string name="timer">Таймер</string>
+    <string name="start">Старт</string>
+    <string name="description">Комментарий</string>
+    <string name="secundomer">Секундомер</string>
     <string name="Choose_deal">Выберите по каким данным составить статистику</string>
     <string name="ListOfDeal">Список дел:</string>
+    <string name="new_deal">Новое дело</string>
+    <string name="name">Название</string>
+    <string name="create">Создать</string>
 </resources>
