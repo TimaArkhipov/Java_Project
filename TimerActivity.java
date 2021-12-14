@@ -3,10 +3,6 @@ package com.example.timetracker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.timetracker.core.Database;
-import com.example.timetracker.core.Deal;
-import com.example.timetracker.core.TaskReport;
-
 import android.app.Dialog;
 
 import android.annotation.SuppressLint;
@@ -123,9 +119,14 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                 } catch (Exception e) {
                     S = 0;
                 }
-                long deltaDate = H * 60 * 60 * 1000 + M * 60 * 1000 + S * 1000;
-                Date dateEnd = new Date(dateStart.getTime() + deltaDate);
-                taskReport.setDateStop(dateEnd);
+
+
+                if (M <= 60 && S <= 60) {
+
+                    long deltaDate = H * 60 * 60 * 1000 + M * 60 * 1000 + S * 1000;
+                    Date dateEnd = new Date(dateStart.getTime() + deltaDate);
+                    taskReport.setDateStop(dateEnd);
+
 
                 /*while(!dateEnd.equals(new Date()))
                 {
@@ -133,15 +134,41 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
                 }*/
 
-                Intent intent = new Intent(TimerActivity.this, TimeRunActivity.class);
-                intent.putExtra("TaskReport",taskReport);
-                intent.putExtra("Deal",deals.getText());
-                intent.putExtra("timeScip",timeScip);
-                startActivity(intent);
-                
+                    String nameSelectedDeal = spinner.getSelectedItem().toString();
+                    Intent intent = new Intent(TimerActivity.this, TimeRunActivity.class);
+                    intent.putExtra("TaskReport",taskReport);
+                    intent.putExtra("Deal",nameSelectedDeal);
+                    intent.putExtra("timeScip",deltaDate);
+                    for(int i = 0; i < dealList.size(); i++) {
+                        if (dealList.get(i).getName().equals(nameSelectedDeal)) {
+                            //saveSharedPreferences(dealList.get(i));
+
+                            FileOutputStream fileOutputStream = null;
+                            try {
+                                fileOutputStream = openFileOutput(dealList.get(i).getName() + ".bin",MODE_PRIVATE);
+                                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                                objectOutputStream.writeObject(dealList.get(i));
+                                objectOutputStream.close();
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    startActivity(intent);
+                }
+                else
+                {
+                    if (M > 60)
+                        min.setText(new Integer(60).toString());
+                    if (S > 60)
+                        sec.setText(new Integer(60).toString());
+                }
                 //Intent intent = new Intent(TimerActivity.this, ReportActivity.class);
                 //intent.putExtra("TaskReport", taskReport);
-                //String nameSelectedDeal = spinner.getSelectedItem().toString();
+
+
                 //intent.putExtra("nameDeal", nameSelectedDeal);
 
                 /*
@@ -156,24 +183,6 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                 */
 
 
-                for(int i = 0; i < dealList.size(); i++) {
-                    if (dealList.get(i).getName().equals(nameSelectedDeal)) {
-                        //saveSharedPreferences(dealList.get(i));
-
-                        FileOutputStream fileOutputStream = null;
-                        try {
-                            fileOutputStream = openFileOutput(dealList.get(i).getName() + ".bin",MODE_PRIVATE);
-                            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                            objectOutputStream.writeObject(dealList.get(i));
-                            objectOutputStream.close();
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                startActivity(intent);
             }
         });
         Button newDealButtonT=(Button) findViewById(R.id.newDealButtonT);
@@ -191,7 +200,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                     @Override
                     public void onClick(View v) {
                         Deal thing2=new Deal(name.getText().toString(),description.getText().toString());
-                        data.getDeals().add(thing2);
+                        nameDealList.add(thing2.getName());
                         newDealDialog.cancel();
                     }
                 });

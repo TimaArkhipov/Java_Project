@@ -13,37 +13,31 @@
         android:layout_marginStart="158dp"
         android:layout_marginTop="112dp"
         android:layout_marginEnd="159dp"
-        android:text="@string/next"
+        android:text="@string/end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="261dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="123dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="124dp"
-        android:max="5"
-        android:progress="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grade" />
 
-    <TextView
-        android:id="@+id/grade"
+    <RatingBar
+        android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="129dp"
-        android:layout_marginEnd="177dp"
-        android:text="@string/grade"
+
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="173dp"
+        android:layout_marginEnd="86dp"
+        android:max="5"
+        android:numStars="5"
+        android:rating="5"
+        android:stepSize="1"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewData" />
+
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
     <EditText
@@ -51,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="101dp"
         android:ems="10"
         android:hint="@string/description"
@@ -59,7 +53,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     <TextView
         android:id="@+id/textViewData"

@@ -10,7 +10,7 @@ import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.timetracker.core.TaskReport;
+
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;

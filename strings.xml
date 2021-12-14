@@ -5,7 +5,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
+
+    <string name="end">Завершить</string>
     <string name="previous">Previous</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
@@ -63,4 +64,5 @@
     <string name="new_deal">Новое дело</string>
     <string name="name">Название</string>
     <string name="create">Создать</string>
+    <string name="time">TIME</string>
 </resources>

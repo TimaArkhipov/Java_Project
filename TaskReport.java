@@ -1,4 +1,6 @@
-package com.example.timetracker.core;
+
+package com.example.timetracker;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

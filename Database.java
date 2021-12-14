@@ -1,4 +1,4 @@
-package com.example.timetracker.core;
+package com.example.timetracker;
 
 import java.io.Externalizable;
 import java.io.FileInputStream;
