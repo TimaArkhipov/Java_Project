@@ -1,29 +1,25 @@
 package com.example.timetracker;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ProgressBar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.timetracker.core.Deal;
+import com.example.timetracker.core.TaskReport;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,15 +31,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class TimerActivity extends AppCompatActivity implements SLDeal{
 
-    //TextView deals;
-    Database data;
     Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +47,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
             new Deal("Walk", "I walk with my dog"),
             new Deal("Workout", "I train at the gym"));
         List<String> nameDealList = new ArrayList<>();
-        data = new Database(dealList);
-        //deals = (TextView) findViewById(R.id.deal);
-        TextView tim = (TextView) findViewById(R.id.textNameT);
-
+        TextView buttonTimerSec = (TextView) findViewById(R.id.textNameT);
 
         for(int i = 0; i < dealList.size(); i++) {
             String thing = dealList.get(i).getName();
@@ -65,11 +56,11 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameDealList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
         //spinner.setPrompt("title");
         //spinner.setSelection(2);
+
         /*
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -85,7 +76,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
             }
         });
         */
-        tim.setOnClickListener(new View.OnClickListener() {
+        buttonTimerSec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TimerActivity.this, SecundomerActivity.class);
@@ -97,9 +88,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
         startTimer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                TaskReport taskReport = new TaskReport();
                 Date dateStart = new Date();
-                taskReport.setDateStart(dateStart);
                 EditText hour = (EditText) findViewById(R.id.editTextHours);
                 EditText min = (EditText) findViewById(R.id.editTextMinuts);
                 EditText sec = (EditText) findViewById(R.id.editTextSeconds);
@@ -122,23 +111,15 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
 
                 if (M <= 60 && S <= 60) {
-
                     long deltaDate = H * 60 * 60 * 1000 + M * 60 * 1000 + S * 1000;
                     Date dateEnd = new Date(dateStart.getTime() + deltaDate);
-                    taskReport.setDateStop(dateEnd);
-
-
-                /*while(!dateEnd.equals(new Date()))
-                {
-                   System.out.println("loop");
-
-                }*/
 
                     String nameSelectedDeal = spinner.getSelectedItem().toString();
-                    Intent intent = new Intent(TimerActivity.this, TimeRunActivity.class);
-                    intent.putExtra("TaskReport",taskReport);
-                    intent.putExtra("Deal",nameSelectedDeal);
-                    intent.putExtra("timeScip",deltaDate);
+                    Intent intentTimeRun = new Intent(TimerActivity.this, TimeRunActivity.class);
+                    TaskReport taskReport = new TaskReport(dateStart,dateEnd,deltaDate);
+                    intentTimeRun.putExtra("TaskReport",taskReport);
+                    intentTimeRun.putExtra("Deal",nameSelectedDeal);
+                    //intent.putExtra("timeScip",deltaDate);
                     for(int i = 0; i < dealList.size(); i++) {
                         if (dealList.get(i).getName().equals(nameSelectedDeal)) {
                             //saveSharedPreferences(dealList.get(i));
@@ -149,21 +130,20 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
                                 objectOutputStream.writeObject(dealList.get(i));
                                 objectOutputStream.close();
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
                     }
-                    startActivity(intent);
+                    startActivity(intentTimeRun);
                 }
                 else
                 {
                     if (M > 60)
-                        min.setText(new Integer(60).toString());
+                        min.setText(new Integer(0).toString());
                     if (S > 60)
-                        sec.setText(new Integer(60).toString());
+                        sec.setText(new Integer(0).toString());
+                    Toast.makeText(getBaseContext(), "Введите корректное время", Toast.LENGTH_SHORT).show();
                 }
                 //Intent intent = new Intent(TimerActivity.this, ReportActivity.class);
                 //intent.putExtra("TaskReport", taskReport);
@@ -185,21 +165,21 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
             }
         });
-        Button newDealButtonT=(Button) findViewById(R.id.newDealButtonT);
+        Button newDealButtonT = (Button) findViewById(R.id.newDealButtonT);
         newDealButtonT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog newDealDialog= new Dialog(TimerActivity.this);
+                Dialog newDealDialog = new Dialog(TimerActivity.this);
                 newDealDialog.setContentView(R.layout.new_deal_layout);
                 newDealDialog.show();
 
-                EditText name=(EditText) newDealDialog.findViewById(R.id.editTextName);
-                EditText description=(EditText) newDealDialog.findViewById(R.id.editTextDescription);
-                Button createNewDeal =(Button) newDealDialog.findViewById(R.id.createDeal);
+                EditText name = (EditText) newDealDialog.findViewById(R.id.editTextName);
+                EditText description = (EditText) newDealDialog.findViewById(R.id.editTextDescription);
+                Button createNewDeal = (Button) newDealDialog.findViewById(R.id.createDeal);
                 createNewDeal.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Deal thing2=new Deal(name.getText().toString(),description.getText().toString());
+                        Deal thing2 = new Deal(name.getText().toString(),description.getText().toString());
                         nameDealList.add(thing2.getName());
                         newDealDialog.cancel();
                     }
@@ -209,7 +189,6 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
 
     }
-
 
 
     private void saveSharedPreferences(Deal deal)
@@ -246,20 +225,9 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
         }
     }
 
-
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-           for(Deal d: data.getDeals())
-            {
-                menu.add(0,d.getId(),0,d.getName());
-            }
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-
-        //deals.setText(item.getTitle().toString() + item.getItemId());
-        return super.onContextItemSelected(item);
+    public void onBackPressed() {
+        Intent intent = new Intent(TimerActivity.this, MenuActivity.class);
+        startActivity(intent);
     }
 }

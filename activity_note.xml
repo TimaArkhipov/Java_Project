@@ -18,4 +18,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <LinearLayout
+        android:layout_width="391dp"
+        android:layout_height="353dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Фильмы на вечер:
+            \nМесто встречи изменить нельзя
+            \nЗолотой телёнок
+            \nТрансформеры" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:background="@drawable/rectangle"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Анекдоты:\nПришёл как-то мужик в бар..." />
+
+        <View
+            android:layout_width="wrap_content"
+            android:background="@drawable/rectangle"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="Список продуктов: \nМакароны\nУксус\nИндейка" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

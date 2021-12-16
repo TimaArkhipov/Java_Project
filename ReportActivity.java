@@ -2,13 +2,19 @@ package com.example.timetracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.timetracker.core.Deal;
+import com.example.timetracker.core.TaskReport;
+
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -27,21 +33,23 @@ import java.util.Date;
 
 
 public class ReportActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener {
+
     TaskReport taskReport;
     RatingBar bar;
     Button end;
     EditText description;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
         bar = (RatingBar) findViewById(R.id.ratingBar);
-        bar.setOnRatingBarChangeListener( this);
+        bar.setOnRatingBarChangeListener(this);
         end = (Button) findViewById(R.id.button2);
         description = (EditText) findViewById(R.id.description);
         Bundle arguments = getIntent().getExtras();
-        String dealName = arguments.getString("nameDeal");
+        String dealName = arguments.getString("Deal");
         taskReport = (TaskReport) arguments.getSerializable("TaskReport");
 
         /*
@@ -82,16 +90,16 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
                  */
                 //TextView tvData = (TextView) findViewById(R.id.textViewData);
                 //tvData.setText("Saved data: \n" + "Name of deal: " + dealName + "\n" + taskReport.toString());
-                TaskReport tr1 = new TaskReport(new Date(10,10,10),new Date(10,10,11));
-                tr1.setComment("На улице снег");
-                tr1.setGrade(3);
+                //TaskReport tr1 = new TaskReport(new Date(10,10,10),new Date(10,10,11));
+                //tr1.setComment("На улице снег");
+                //tr1.setGrade(3);
 
                 FileOutputStream fileOutputStream = null;
                 try {
-                    fileOutputStream = openFileOutput(dealName + "1" + ".bin",MODE_APPEND);
+                    fileOutputStream = openFileOutput(dealName + "_tr.bin",MODE_APPEND);
                     ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
                     objectOutputStream.writeObject(taskReport);
-                    objectOutputStream.writeObject(tr1);
+                    //objectOutputStream.writeObject(tr1);
                     objectOutputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -100,21 +108,27 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
                 TaskReport newTR1 = null;
                 TaskReport newTR2 = null;
                 try {
-                    fis = openFileInput(dealName + "1" + ".bin");
+                    fis = openFileInput(dealName + "_tr.bin");
                     ObjectInputStream objectInputStream = new ObjectInputStream(fis);
                     newTR1 = (TaskReport) objectInputStream.readObject();
-                    newTR2 = (TaskReport) objectInputStream.readObject();
+                    //newTR2 = (TaskReport) objectInputStream.readObject();
                     TextView tvData = (TextView) findViewById(R.id.textViewData);
-                    String str1 = "Это первый загрузившийся: \n" + newTR1.toString();
-                    String str2 = "Это второй загрузившийся: \n" + newTR2.toString();
-                    tvData.setText(str1 + "\n\n" + str2);
+                    //String str1 = "Это первый загрузившийся: \n" + newTR1.toString();
+                    //String str2 = "Это второй загрузившийся: \n" + newTR2.toString();
+                    //tvData.setText(str1 + "\n\n" + str2);
+                    tvData.setText("Название дела:" + dealName + '\n' + newTR1.toString());
                 } catch (ClassNotFoundException | IOException e) {
                     e.printStackTrace();
                 }
-
+                /*
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(ReportActivity.this, MenuActivity.class);
                 startActivity(intent);
-
+                */
 
 
             }
@@ -189,4 +203,34 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ReportActivity.this, TimerActivity.class);
+        startActivity(intent);
+    }
+    /*
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(
+                ReportActivity.this);
+        quitDialog.setTitle("Если нажмёте ещё раз, то оценка и комментарий не сохранятся?");
+
+        quitDialog.setPositiveButton("Таки да!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        quitDialog.setPositiveButton()
+
+        quitDialog.setNegativeButton("Нет", new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
+    }
+    */
 }

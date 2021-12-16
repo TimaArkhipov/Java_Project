@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FirstApp</string>
+    <string name="app_name">Дело времени</string>
     <string name="myscreen">Какой-то текст на myscreen</string>
     <string name="title_activity_go">GoActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -64,5 +64,5 @@
     <string name="new_deal">Новое дело</string>
     <string name="name">Название</string>
     <string name="create">Создать</string>
-    <string name="time">TIME</string>
+    <string name="time">Время</string>
 </resources>

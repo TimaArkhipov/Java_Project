@@ -5,13 +5,20 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.example.timetracker.core.Deal;
+import com.example.timetracker.core.TaskReport;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,13 +40,21 @@ public class StatActivity extends AppCompatActivity {
             }
         };
 
+        List<Deal> dealList = loadDealListInFile();
+        List<String> nameDealList = new ArrayList<>();
+        for(Deal item : dealList){
+            nameDealList.add(item.getName());
+        }
+        nameDealList.add("Все дела");
+
         //Временное решение
-        List<String> nameDealList = Arrays.asList("Программирование", "Все дела", "Прогулка", "Тренировка");
+        //List<String> nameDealList = Arrays.asList("Программирование", "Все дела", "Прогулка", "Тренировка");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameDealList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner = (Spinner) findViewById(R.id.spinner2);
+        spinner.setPrompt("Выберите вариант");
         spinner.setAdapter(adapter);
         //spinner.setPrompt("Выберите вариант"); // Не работает почему-то
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -68,5 +83,49 @@ public class StatActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(StatActivity.this, MenuActivity.class);
+        startActivity(intent);
+    }
+
+    public List<Deal> loadDealListInFile(){
+        FileInputStream fileInputStream = null;
+        List<Deal> dealList = new ArrayList<>();
+        Deal dealBuff = new Deal();
+        try {
+            fileInputStream = openFileInput("Deals.bin");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            int size = (int) objectInputStream.readObject();
+            Log.d("myTag", "Is size: " + size);
+
+            for(int i = 0; i < size; i++) {
+                dealBuff = (Deal) objectInputStream.readObject();
+                Log.d("myTag1", "Deal -> " + dealBuff.toString());
+                dealList.add(dealBuff);
+            }
+            objectInputStream.close();
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+        /*
+        try {
+            fileInputStream = openFileInput("Deals.bin");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            //int size = (int) objectInputStream.readObject();
+            //Log.d("myTag", "Is size: " + size);
+
+            //for(int i = 0; i < size; i++) {
+                dealBuff = (Deal) objectInputStream.readObject();
+                //Log.d("myTag1", "Deal -> " + dealBuff.toString());
+                //dealList.add(dealBuff);
+            //}
+            objectInputStream.close();
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+         */
+        return dealList;
+    }
 
 }

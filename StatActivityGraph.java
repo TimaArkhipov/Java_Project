@@ -1,16 +1,21 @@
 package com.example.timetracker;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Date;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import com.example.timetracker.core.TaskReport;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -53,6 +58,25 @@ public class StatActivityGraph extends AppCompatActivity {
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
         layout.addView(graphView);
          */
+
+        //load Task reports
+        /*
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(dealName + "_tr.bin");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fis);
+            newTR1 = (TaskReport) objectInputStream.readObject();
+            //newTR2 = (TaskReport) objectInputStream.readObject();
+            TextView tvData = (TextView) findViewById(R.id.textViewData);
+            //String str1 = "Это первый загрузившийся: \n" + newTR1.toString();
+            //String str2 = "Это второй загрузившийся: \n" + newTR2.toString();
+            //tvData.setText(str1 + "\n\n" + str2);
+            tvData.setText("Название дела:" + dealName + '\n' + newTR1.toString());
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+        */
+
     }
     /*
     private TaskReport saveSharedPreferences(TaskReport taskReport)
@@ -87,4 +111,9 @@ public class StatActivityGraph extends AppCompatActivity {
         }
     }
      */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(StatActivityGraph.this, StatActivity.class);
+        startActivity(intent);
+    }
 }

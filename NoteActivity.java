@@ -32,5 +32,12 @@ public class NoteActivity extends AppCompatActivity {
             }
         };
         buttonPlus.setOnClickListener(onClickListener);
+        //
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(NoteActivity.this, MenuActivity.class);
+        startActivity(intent);
     }
 }
