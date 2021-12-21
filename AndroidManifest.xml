@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.timetracker">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FirstApp">
+        <activity
+            android:name="com.example.timetracker.CreateNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.StatActivityGraph"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.MenuActivity1"
+            android:exported="false"
+            android:label="@string/title_activity_menu1"
+            android:theme="@style/Theme.FirstApp.NoActionBar" />
+        <activity
+            android:name="com.example.timetracker.NoteActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.StatActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.TimeActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.SecundomerActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.ReportActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.TimerActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.TimeRunActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.timetracker.MenuActivity"
+            android:exported="true"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+    <!--
+    Можно сделать свой android:label для каждого activity
+    -->
+</manifest>
