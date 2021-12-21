@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateNoteActivity" >
+    tools:context=".CreateNoteActivity">
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/noteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="start|top"
+        android:hint="@string/textOfNote"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
-        android:hint="@string/writeYourNoteHere"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="38dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="@string/noteName"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dataNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="134dp"
+        android:text="@string/BigText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noteTextView" />
 
     <!--
     android:autofillHints="" //Не нравится и не работает как android:hint
@@ -26,4 +52,4 @@
     android:title="Создание заметки" // Не работает для activity, их заголовок
                                         изменяется в файле AndroidManifest.xml
     -->
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
