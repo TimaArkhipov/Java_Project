@@ -42,8 +42,8 @@
     <string name="one_thing">Одно дело</string>
     <string name="getStatOnDeal">Вывести статистику</string>
     <string name="plus">+</string>
-    <string name="writeYourNoteHere">Напишите здесь вашу заметку</string>
-
+    <string name="textOfNote">Текст заметки</string>
+    <string name="noteName">Название</string>
 
     <string name="start_timer">Старт таймера</string>
     <string name="choose_time">Выберите время</string>
@@ -65,4 +65,5 @@
     <string name="name">Название</string>
     <string name="create">Создать</string>
     <string name="time">Время</string>
+    <string name="BigText">Огромная надпись</string>
 </resources>
