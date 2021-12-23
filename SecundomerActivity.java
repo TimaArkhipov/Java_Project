@@ -108,7 +108,7 @@ public class SecundomerActivity extends AppCompatActivity {
                     String nameSelectedDeal = spinner.getSelectedItem().toString();
                     taskReport.setDateStop(de);
                     intent.putExtra("TaskReport",taskReport);
-                    intent.putExtra("Deal",nameSelectedDeal);
+                    intent.putExtra("Deal",dealList.get(spinner.getSelectedItemPosition()));
 
                     startActivity(intent);
 

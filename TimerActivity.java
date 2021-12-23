@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,14 +14,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.timetracker.core.Deal;
 import com.example.timetracker.core.TaskReport;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -43,9 +40,9 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
         List<Deal> dealList = Arrays.asList(
-            new Deal("Program job", "I make program"),
-            new Deal("Walk", "I walk with my dog"),
-            new Deal("Workout", "I train at the gym"));
+                new Deal("Program job", "I make program"),
+                new Deal("Walk", "I walk with my dog"),
+                new Deal("Workout", "I train at the gym"));
         List<String> nameDealList = new ArrayList<>();
         TextView buttonTimerSec = (TextView) findViewById(R.id.textNameT);
 
@@ -118,7 +115,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                     Intent intentTimeRun = new Intent(TimerActivity.this, TimeRunActivity.class);
                     TaskReport taskReport = new TaskReport(dateStart,dateEnd,deltaDate);
                     intentTimeRun.putExtra("TaskReport",taskReport);
-                    intentTimeRun.putExtra("Deal",nameSelectedDeal);
+                    intentTimeRun.putExtra("Deal",dealList.get(spinner.getSelectedItemPosition()));
                     //intent.putExtra("timeScip",deltaDate);
                     for(int i = 0; i < dealList.size(); i++) {
                         if (dealList.get(i).getName().equals(nameSelectedDeal)) {
