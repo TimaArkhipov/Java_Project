@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".SecundomerActivity">
 
+
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="162dp"
         android:text="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +30,8 @@
 
         android:layout_marginEnd="136dp"
         android:clickable="true"
-
         android:minHeight="48dp"
         android:text="@string/secundomer"
-
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="53dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="140dp"
         android:text="00:00:00"
         android:textSize="40sp"
@@ -74,6 +73,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTextS"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="162dp"
+        android:text="ПАУЗА"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
