@@ -1,11 +1,20 @@
 package com.example.timetracker;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.timetracker.core.Deal;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -17,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         Button buttonTime = (Button) findViewById(R.id.button1);
         Button buttonStat = (Button) findViewById(R.id.button2);
         Button buttonNote = (Button) findViewById(R.id.button3);
+        Button buttonMemory = (Button) findViewById(R.id.button4);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -33,6 +43,9 @@ public class MenuActivity extends AppCompatActivity {
                         intent = new Intent(MenuActivity.this,NoteActivity.class);
                         intent.putExtra("whatToDo","Nothing");
                         break;
+                    case R.id.button4:
+                        intent = new Intent(MenuActivity.this,DealMemoryActivity.class);
+                        break;
                 }
                 startActivity(intent);
             }
@@ -40,6 +53,7 @@ public class MenuActivity extends AppCompatActivity {
         buttonTime.setOnClickListener(onClickListener);
         buttonStat.setOnClickListener(onClickListener);
         buttonNote.setOnClickListener(onClickListener);
+        buttonMemory.setOnClickListener(onClickListener);
     }
 
     @Override
