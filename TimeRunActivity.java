@@ -3,6 +3,7 @@ package com.example.timetracker;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 
+import com.example.timetracker.core.Deal;
 import com.example.timetracker.core.TaskReport;
 
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class TimeRunActivity extends AppCompatActivity {
         Bundle arguments = getIntent().getExtras();
         if(arguments != null) {
             TaskReport taskReport = (TaskReport) arguments.getSerializable("TaskReport");
-            String dealName = arguments.getString("Deal");
+            Deal dealName =(Deal) arguments.get("Deal");
             sec= taskReport.getWorkTime();
 
 
