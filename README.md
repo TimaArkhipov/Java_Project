@@ -46,4 +46,5 @@
 
 ## Седьмая лабораторная:
 [Расчет трудоемкости разрабатываемого ПО](https://docs.google.com/document/d/1iW6_7_ID1gWzDxzbACiKWoqWX73gXSrOs6moe6Xnk30/edit)
+
 [Подробные расчеты](https://docs.google.com/spreadsheets/d/1bdKvuvb5zvQteuKG-IIve_YU30wYrsViNeHHKDFzNAo/edit#gid=1465495348)
