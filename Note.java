@@ -1,9 +1,12 @@
 package com.example.timetracker.core;
 
+import java.io.FileInputStream;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
+
 
 public class Note implements Externalizable {
 
@@ -43,6 +46,8 @@ public class Note implements Externalizable {
         return id;
     }
 
+    public static int getCount() { return count; }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -51,13 +56,16 @@ public class Note implements Externalizable {
         this.textNote = textNote;
     }
 
+    public static void setCount(int new_count) {
+            count = new_count;
+    }
+
     @Override
     public String toString() {
         return "Name: " + name + "\n" +
                 "Text of note: " + textNote + "\n" +
                 "Id of note: " + id + "\n";
     }
-
 
     @Override
     public void writeExternal(ObjectOutput output) throws IOException {
@@ -72,4 +80,5 @@ public class Note implements Externalizable {
         textNote = (String) input.readObject();
         id = (int) input.readObject();
     }
+
 }

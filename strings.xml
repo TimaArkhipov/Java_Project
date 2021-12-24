@@ -66,5 +66,5 @@
     <string name="create">Создать</string>
     <string name="time">Время</string>
     <string name="BigText">Огромная надпись</string>
-    <string name="deals">Дела</string>
+    <string name="NotesAreDontExisted">Заметок ещё нет</string>
 </resources>
