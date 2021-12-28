@@ -14,7 +14,7 @@ public class Note implements Externalizable {
     private String name;
     private String textNote;
     private int id;
-    private static int count;
+    private static int count; //comm fo gitS
 
     public Note(){}
 
