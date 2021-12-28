@@ -46,18 +46,19 @@ public class TimeRunActivity extends AppCompatActivity {
                     if (stop_start)
                         sec=sec-1000;
                     handler.postDelayed(this,1000);
-                    if (sec==0)
-                    {
 
-                        Intent intent = new Intent(TimeRunActivity.this, ReportActivity.class);
-                        intent.putExtra("TaskReport",taskReport);
-                        intent.putExtra("Deal",dealName);
-                        startActivity(intent);
-
-                    }
 
                 }
             });
+            if (sec<=0)
+            {
+
+                Intent intent = new Intent(TimeRunActivity.this, ReportActivity.class);
+                intent.putExtra("TaskReport",taskReport);
+                intent.putExtra("Deal",dealName);
+                startActivity(intent);
+
+            }
 
             Button end=(Button) findViewById(R.id.endButton);
             end.setOnClickListener(new View.OnClickListener(){
