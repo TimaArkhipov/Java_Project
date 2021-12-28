@@ -23,9 +23,9 @@ public class DealMemoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_memory);
         List<Deal> dealList = Arrays.asList(
-                new Deal("Программирование", "I make program"),
-                new Deal("Прогулка", "I walk with my dog"),
-                new Deal("Workout", "I train at the gym"));
+                new Deal("Программирование", "Делаем проект в команде"),
+                new Deal("Прогулка", "Я гуляю со своей собакой"),
+                new Deal("Учеба", "Я делаю уроки")));
         List<String> nameDealList = new ArrayList<>();
 
         for(int i = 0; i < dealList.size(); i++) {
