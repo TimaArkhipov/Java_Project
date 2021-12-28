@@ -38,7 +38,7 @@ public class NoteActivity extends ListActivity implements SaveLoadToFile{
         //saveNoteToFileBegin();
         noteList = new ArrayList<>();
         List<String> noteNameList = new ArrayList<>();
-        saveNoteToFileBegin(); //Написать условие - если не существует
+        //saveNoteToFileBegin(); // Написать условие - если не существует
         int n = SaveLoadToFile.loadCountNoteToFile("CountNote.bin",NoteActivity.this);
         Note.setCount(n);
         for(int i = 1; i <= n; i++) {
