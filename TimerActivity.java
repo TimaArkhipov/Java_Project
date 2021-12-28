@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class TimerActivity extends AppCompatActivity implements SLDeal{
+public class TimerActivity extends AppCompatActivity implements SaveLoadToFile{
 
     Spinner spinner;
 
@@ -39,16 +39,12 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        List<Deal> dealList = Arrays.asList(
-                new Deal("Program job", "I make program"),
-                new Deal("Walk", "I walk with my dog"),
-                new Deal("Workout", "I train at the gym"));
+        List<Deal> dealList = SaveLoadToFile.loadDealListInFile(TimerActivity.this);
         List<String> nameDealList = new ArrayList<>();
         TextView buttonTimerSec = (TextView) findViewById(R.id.textNameT);
 
         for(int i = 0; i < dealList.size(); i++) {
-            String thing = dealList.get(i).getName();
-            nameDealList.add(thing);
+            nameDealList.add(dealList.get(i).getName());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameDealList);
@@ -170,6 +166,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
             }
         });
+        // letter "T" at the end of the variable name means "Timer"
         Button newDealButtonT = (Button) findViewById(R.id.newDealButtonT);
         newDealButtonT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +183,8 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
                     public void onClick(View v) {
                         Deal thing2 = new Deal(name.getText().toString(),description.getText().toString());
                         nameDealList.add(thing2.getName());
+                        dealList.add(thing2);
+                        SaveLoadToFile.saveDealListInFile(dealList,TimerActivity.this);
                         newDealDialog.cancel();
                     }
                 });
@@ -195,7 +194,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
 
     }
 
-
+    /*
     private void saveSharedPreferences(Deal deal)
     {
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -229,7 +228,7 @@ public class TimerActivity extends AppCompatActivity implements SLDeal{
             Log.wtf(getClass().getName(), e.toString());
         }
     }
-
+    */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(TimerActivity.this, MenuActivity.class);
