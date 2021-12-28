@@ -20,7 +20,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
-public class ReportActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener {
+public class ReportActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, 
+    SaveLoadToFile {
 
     TaskReport taskReport;
     RatingBar bar;
@@ -37,7 +38,7 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
         end = (Button) findViewById(R.id.button2);
         description = (EditText) findViewById(R.id.description);
         Bundle arguments = getIntent().getExtras();
-        Deal dealName = (Deal)arguments.get("Deal");
+        Deal deal = (Deal)arguments.getSerializable("Deal");
         taskReport = (TaskReport) arguments.getSerializable("TaskReport");
 
         /*
@@ -71,44 +72,18 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
             public void onClick(View v) {
                 taskReport.setGrade(bar.getProgress());
                 taskReport.setComment(description.getText().toString());
+                
+                String filePath = dealName + "_tr.bin";
+                //List<Deal> dealList = SaveLoadToFile.loadDealListInFile(ReportActivity.this);
 
+                saveTaskReportToFile(filePath, taskReport, ReportActivity.this);
+                
                 Intent intent = new Intent(ReportActivity.this, MenuActivity.class);
                 startActivity(intent);
-
-
-
-
-
             }
         });
     }
-
-    public void saveToFile(String fileName, TaskReport taskReport) {
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = openFileOutput(fileName,MODE_APPEND);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(taskReport);
-            objectOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public TaskReport loadToFile(String fileName) {
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = openFileInput(fileName);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            TaskReport taskReport = (TaskReport) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return taskReport;
-
-    }
+        
     /*
     private void saveSharedPreferences(TaskReport taskReport)
     {
