@@ -97,9 +97,9 @@ public interface SaveLoadToFile {
     static void saveDealListInFileBegin(Context context) {
         FileOutputStream fileOutputStream = null;
         List<Deal> dealList = Arrays.asList(
-                        new Deal("Программирование", "Делаем проект в команде"),
-                        new Deal("Прогулка", "Я гуляю со своей собакой"),
-                        new Deal("Учеба", "Я делаю уроки"));
+                new Deal("Программирование", "Делаем проект в команде"),
+                new Deal("Прогулка", "Я гуляю со своей собакой"),
+                new Deal("Учеба", "Я делаю уроки"));
 
         if (dealList.size() >= 2) {
             dealList.add(new Deal("Все дела", ""));

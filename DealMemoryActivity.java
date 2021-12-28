@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.timetracker.core.Deal;
 
@@ -24,8 +23,8 @@ public class DealMemoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_memory);
         List<Deal> dealList = Arrays.asList(
-                new Deal("Program job", "I make program"),
-                new Deal("Walk", "I walk with my dog"),
+                new Deal("Программирование", "I make program"),
+                new Deal("Прогулка", "I walk with my dog"),
                 new Deal("Workout", "I train at the gym"));
         List<String> nameDealList = new ArrayList<>();
 
@@ -43,7 +42,7 @@ public class DealMemoryActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DealMemoryActivity.this, ListTaskReportActicity.class);
+                Intent intent = new Intent(DealMemoryActivity.this, ListTaskReportActivity.class);
                 intent.putExtra("Deal",dealList.get(spinner.getSelectedItemPosition()));
                 startActivity(intent);
             }

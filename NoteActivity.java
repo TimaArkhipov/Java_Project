@@ -38,7 +38,7 @@ public class NoteActivity extends ListActivity implements SaveLoadToFile{
         //saveNoteToFileBegin();
         noteList = new ArrayList<>();
         List<String> noteNameList = new ArrayList<>();
-        //saveNoteToFileBegin(); Написать условие - если не существует
+        saveNoteToFileBegin(); //Написать условие - если не существует
         int n = SaveLoadToFile.loadCountNoteToFile("CountNote.bin",NoteActivity.this);
         Note.setCount(n);
         for(int i = 1; i <= n; i++) {
@@ -93,9 +93,9 @@ public class NoteActivity extends ListActivity implements SaveLoadToFile{
     public void saveNoteToFileBegin() {
         FileOutputStream fileOutputStream = null;
         List<Note> noteList = Arrays.asList(
-                        new Note("Сон - это важно", "А в сессию очень важно"),
-                        new Note("Стих", "Сел и стих"),
-                        new Note("Список продуктов", "Кофе, молоко, блендер"));
+                new Note("Сон - это важно", "А в сессию очень важно"),
+                new Note("Стих", "Сел и стих"),
+                new Note("Список продуктов", "Кофе, молоко, блендер"));
         /*
         if (dealList.size() >= 2) {
             dealList.add(new Deal("Все дела", "бла"));
@@ -110,7 +110,7 @@ public class NoteActivity extends ListActivity implements SaveLoadToFile{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            SaveLoadToFile.saveCountNoteToFile("CountNote.bin", noteList.get(i - 1).getId(), NoteActivity.this);
+            SaveLoadToFile.saveCountNoteToFile("CountNote.bin", Note.getCount(), NoteActivity.this);
         }
     }
 

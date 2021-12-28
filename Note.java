@@ -14,7 +14,7 @@ public class Note implements Externalizable {
     private String name;
     private String textNote;
     private int id;
-    private static int count; //comm fo gitS
+    private static int count;
 
     public Note(){}
 
@@ -57,7 +57,7 @@ public class Note implements Externalizable {
     }
 
     public static void setCount(int new_count) {
-            count = new_count;
+        count = new_count;
     }
 
     @Override

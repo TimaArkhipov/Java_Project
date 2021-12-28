@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,14 +14,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.timetracker.core.Deal;
 import com.example.timetracker.core.TaskReport;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,7 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class TimerActivity extends AppCompatActivity implements SaveLoadToFile{
+public class TimerActivity extends AppCompatActivity implements SLDeal{
 
     Spinner spinner;
 
@@ -42,20 +39,16 @@ public class TimerActivity extends AppCompatActivity implements SaveLoadToFile{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-
-        List<Deal> dealList = SaveLoadToFile.loadDealListInFile(TimerActivity.this);
-        List<String> nameDealList = new ArrayList<>();
-        /*
         List<Deal> dealList = Arrays.asList(
-            new Deal("Program job", "I make program"),
-            new Deal("Walk", "I walk with my dog"),
-            new Deal("Workout", "I train at the gym"));
-        List<String> nameDealList = new ArrayList<>();*/
+                new Deal("Program job", "I make program"),
+                new Deal("Walk", "I walk with my dog"),
+                new Deal("Workout", "I train at the gym"));
+        List<String> nameDealList = new ArrayList<>();
         TextView buttonTimerSec = (TextView) findViewById(R.id.textNameT);
 
         for(int i = 0; i < dealList.size(); i++) {
-            //String thing = dealList.get(i).getName();
-            nameDealList.add(dealList.get(i).getName());
+            String thing = dealList.get(i).getName();
+            nameDealList.add(thing);
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nameDealList);
@@ -122,7 +115,7 @@ public class TimerActivity extends AppCompatActivity implements SaveLoadToFile{
                     Intent intentTimeRun = new Intent(TimerActivity.this, TimeRunActivity.class);
                     TaskReport taskReport = new TaskReport(dateStart,dateEnd,deltaDate);
                     intentTimeRun.putExtra("TaskReport",taskReport);
-                    intentTimeRun.putExtra("Deal",nameSelectedDeal);
+                    intentTimeRun.putExtra("Deal",dealList.get(spinner.getSelectedItemPosition()));
                     //intent.putExtra("timeScip",deltaDate);
                     for(int i = 0; i < dealList.size(); i++) {
                         if (dealList.get(i).getName().equals(nameSelectedDeal)) {
@@ -143,10 +136,18 @@ public class TimerActivity extends AppCompatActivity implements SaveLoadToFile{
                 }
                 else
                 {
-                    if (M > 60)
-                        min.setText(new Integer(0).toString());
                     if (S > 60)
-                        sec.setText(new Integer(0).toString());
+                    {
+                        sec.setText(new Integer((int)S%60).toString());
+                        min.setText(new Integer((int)S/60).toString());
+                    }
+                    if (M > 60)
+                    {
+                        min.setText(new Integer((int)M%60).toString());
+                        hour.setText(new Integer((int)M/60).toString());
+                    }
+
+
                     Toast.makeText(getBaseContext(), "Введите корректное время", Toast.LENGTH_SHORT).show();
                 }
                 //Intent intent = new Intent(TimerActivity.this, ReportActivity.class);
@@ -170,7 +171,6 @@ public class TimerActivity extends AppCompatActivity implements SaveLoadToFile{
             }
         });
         Button newDealButtonT = (Button) findViewById(R.id.newDealButtonT);
-        // letter "T" at the end of the variable name means "Timer"
         newDealButtonT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,13 +186,13 @@ public class TimerActivity extends AppCompatActivity implements SaveLoadToFile{
                     public void onClick(View v) {
                         Deal thing2 = new Deal(name.getText().toString(),description.getText().toString());
                         nameDealList.add(thing2.getName());
-                        dealList.add(thing2);
-                        SaveLoadToFile.saveDealListInFile(dealList,TimerActivity.this);
                         newDealDialog.cancel();
                     }
                 });
             }
         });
+
+
     }
 
 

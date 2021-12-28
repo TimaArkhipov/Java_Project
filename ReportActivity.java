@@ -5,37 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.timetracker.core.Deal;
 import com.example.timetracker.core.TaskReport;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import java.io.File;
+
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 public class ReportActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener {
 
-    private static final int FIRST = 1;
     TaskReport taskReport;
     RatingBar bar;
     Button end;
@@ -51,7 +37,7 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
         end = (Button) findViewById(R.id.button2);
         description = (EditText) findViewById(R.id.description);
         Bundle arguments = getIntent().getExtras();
-        String dealName = arguments.getString("Deal");
+        Deal dealName = (Deal)arguments.get("Deal");
         taskReport = (TaskReport) arguments.getSerializable("TaskReport");
 
         /*
@@ -86,30 +72,29 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
                 taskReport.setGrade(bar.getProgress());
                 taskReport.setComment(description.getText().toString());
 
-                String filePath = dealName + "_tr.bin";
-                List<Deal> dealList = SaveLoadToFile.loadDealListInFile(ReportActivity.this);
+                Intent intent = new Intent(ReportActivity.this, MenuActivity.class);
+                startActivity(intent);
 
-                saveTaskReportToFile(filePath,taskReport);
-                for(Deal item : dealList){
-                    if (dealName.equals(item.getName())) {
-                        item.incrementTaskReportCount();
-                    }
-                }
+
+
+
+
             }
         });
     }
 
-    public void saveTaskReportToFile(String fileName, TaskReport taskReport) {
+    public void saveToFile(String fileName, TaskReport taskReport) {
         FileOutputStream fileOutputStream = null;
         try {
-        fileOutputStream = openFileOutput(fileName,MODE_APPEND);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(taskReport);
-        objectOutputStream.close();
+            fileOutputStream = openFileOutput(fileName,MODE_APPEND);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(taskReport);
+            objectOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public TaskReport loadToFile(String fileName) {
         FileInputStream fileInputStream = null;
@@ -124,9 +109,6 @@ public class ReportActivity extends AppCompatActivity implements RatingBar.OnRat
         return taskReport;
 
     }
-
-
-
     /*
     private void saveSharedPreferences(TaskReport taskReport)
     {
